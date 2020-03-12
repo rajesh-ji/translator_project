@@ -12,7 +12,7 @@ include('header.php');
                             <p class="lead">
                             Get the chance to work on interesting projects, at your own pace, and deciding your own rate. We provide the technology for free, and support your career with continuous education programs.
                             </p>
-                            <a class="btn btn--primary type--uppercase" href="#">
+                            <a class="btn btn--primary type--uppercase" href="apply.php">
                                 <span class="btn__text">
                                     Apply as a translator
                                 </span>
