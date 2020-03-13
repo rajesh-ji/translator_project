@@ -15,7 +15,7 @@
                                     Instant quote
                                 </span>
                             </a>
-							<a class="btn btn--primary type--uppercase" href="#" style="background-color:white;">
+							<a class="btn btn--primary type--uppercase" href="contact.php" style="background-color:white;">
                                 <span class="btn__text text-info"  >
                                     About us
                                 </span>

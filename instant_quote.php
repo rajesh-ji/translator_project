@@ -14,22 +14,25 @@
              <section>
                 <div class="container" style="background-color:#f2f5f7">
                     <div class="row">
-                        <form action="demo.php" class="form-horizontal" method="post">
+                        <form action="#" class="form-horizontal" method="post">
                             <div class="col-md-1"></div>
                             <div class="col-md-3">
                                 <div class="" style="width:97%;">
-                                    <label style="font-size: 16px;padding-bottom: 7px;">From</label>
+                                <?php include 'config.php'; 
+                                   $qf = "select * from system_lang";
+                                    $langfrom = mysqli_query($conn,$qf);
+                                ?>
+                                    <label style="font-size: 16px; margin-top: 10px;">From</label>
                                     <div class="selection" style="height:50px;">
                                         <select class="select2" name="select_from">
-                                            <option value="disabled">--Select--</option>    
-                                            <option value="delhi">Delhi</option>   
-                                            <option value="Rajastn">Delhi</option> 
-                                            <option value="udaipura">Rajasthan</option> 
-                                            <option value="raipur">Bihar</option> 
+                                            <option value="disabled">--Select--</option>  
+                                            <?php while($row = mysqli_fetch_assoc($langfrom)){ ?> 
+                                            <option><?php  $row['id'];?><?php echo $row['name']?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="" style="width:97%">
+                                <div class="" style="width:97%; margin-top: 20px;">
                                     <label style="font-size: 16px;padding-bottom: 7px;">Subject</label>
                                     <select class="select2" name="select_sub">
                                         <option value="disabled">--Select--</option>    
@@ -42,13 +45,17 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="" style="width:97%;">
+                                <div class="" style="width:97%; padding-bottom: 15px;">
+                                <?php 
+                                    $qt = "select * from system_lang";
+                                    $langto = mysqli_query($conn,$qt);
+                                ?>
                                     <label style="font-size: 16px;padding-bottom: 0px;">To</label>
                                         <select class="select2" multiple="multiple" name="select_to[]">
                                             <option value="">--Select--</option>    
-                                            <option value="Delhi">Delhi</option>
-                                            <option value="Haidrabad">Haidrabad</option>
-                                            <option value="pune">pune</option>
+                                            <?php while($row = mysqli_fetch_assoc($langto)){?>
+                                            <option><?php  $row['id']?><?php echo $row['name']?></option>
+                                            <?php } ?>
                                         </select>
                                 </div>
                                 <div class="">
@@ -67,7 +74,7 @@
                                     </div>
                                 </div>
                                 <div class="">
-                                    <button type="submit" name="submit" class="btn btn-primary show_price" id="show_price" onclick="changeInnerHtml()" style="width: 257px; height:52px;font-size:16px;" >Show prices</button>
+                                    <button type="button" name="submit" class="btn btn-primary show_price" id="show_price" onclick="changeInnerHtml()" style="width: 257px; height:52px;font-size:16px;" >Show prices</button>
                                      
                                 </div>
                             </div>
@@ -80,8 +87,8 @@
                     </div>
                 </div>
             
-                <div class="container" id="showprices" style="display:none;background-color:#f2f5f7;margin-left: auto;margin-right: auto;">
-                <h4>Choose your translator</h4>
+                <div class="container" id="showprices" style="display:none; background-color:#f2f5f7; margin-left: auto; margin-right:auto; padding-left: 7%;">
+                <h4 style="margin-left: 15px;">Choose your translator</h4>
                 
                 <div class="row" style="margin-top:5px;margin-bottom:50px;">
                            
@@ -455,4 +462,4 @@
                 </div>
                 <!--end of container-->
             </section>
-            <?php include 'footer.php';?>
+ <?php include 'footer.php';?>

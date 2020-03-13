@@ -414,9 +414,9 @@
                             </div>
                             <!--end module-->
                             <div class="bar__module">
-                                <a class="btn btn--sm btn--primary type--uppercase" href="contact.php">
+                                <a class="btn btn--sm btn--primary type--uppercase" href="instant_quote.php">
                                     <span class="btn__text">
-                                        Contact us
+                                       Instant Quote
                                     </span>
                                 </a>
                             </div>

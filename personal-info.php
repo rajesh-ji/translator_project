@@ -1,111 +1,20 @@
+<?php include('config.php');
+
+    if(isset($_POST['submit'])){
+        extract($_POST);
+        $q = "INSERT INTO user_detail(fname,lname) VALUES ('$fname','$lname')";
+
+        if (mysqli_query($conn, $q)) {
+            // echo " created successfully";
+            header('location:experience.php');
+        } 
+    }
+?>
+
 <html>
 <head>
 <title>personal-info</title>
-<style>
-	a:visited.main_selected_tab{
-	color: #FFFFFF;
-}
-.nav_bar_holder{
-	border-bottom: solid 8px #0055b8;
-}
-td.main_selected_tab,
-.cv.main_selected_tab{
-	border: none;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 6px;
-    padding-bottom: 5px;
-    background-color: #0055b8;
- }
-table {
-    border-collapse: separate;
-    white-space: normal;
-    line-height: normal;
-    font-weight: normal;
-    font-size: medium;
-    font-style: normal;
-    color: -internal-quirk-inherit;
-    text-align: start;
-    border-spacing: 0px;
-    font-variant: normal;
-}
-td {
-    display: table-cell;
-    vertical-align: inherit;
-}
-td {
-    font-size: 13px;
-}
-a.main_selected_tab {
-    text-decoration: none;
-    color: #FFFFFF;
-    font-weight: bold;
-}
-td.main_greyed_tab {
-    border: none;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    background-color: #EEEEEE;
-    color: #AAAAAA;
-    font-weight: bold;
-    border-top: solid 1px #DDDDDD;
-    border-left: solid 1px #DDDDDD;
-    border-right: solid 1px #DDDDDD;
-}
-h1 {
-    font-size: 28px;
-    font-weight: bold;
-    padding-top: 0px;
-    margin-top: 10px;
-    margin-bottom: 12px;
-}
-input[type=submit] {
-    border: none;
-    font: inherit;
-    color: inherit;
-    background: none;
-    background-color: #0055b8;
-    border-radius: 2px;
-    color: #fff;
-    font-weight: 500;
-    box-shadow: 0 0 0 1px #0055b8;
-    transition: background-color .25s ease-in-out,box-shadow .25s ease-in-out;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    white-space: nowrap;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    font-size: 13px;
-}
-div.section {
-    padding: 12px;
-    margin-bottom: 12px;
-    border: solid 1px #E0E0FF;
-    background-color: #FBFBFF;
-    width: 976px;
-}
-input[type=text], input[type=password], input[type=submit], select {
-    padding: 6px;
-    border-radius: 2px;
-    border: 1px solid #aaa;
-}
-img[Attributes Style] {
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-    border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
-}
-
-</style>
+<link rel="stylesheet" href="css/inspact.css">
 </head>
 <body style="height: 1324px;">
 <table align="center">
@@ -186,7 +95,7 @@ img[Attributes Style] {
         <tbody><tr><td class="id_bar_holder">
                 <table width="1000" valign="bottom" border="0" cellpadding="0" cellspacing="0">
                     <tbody><tr>
-                        <td class="idbar" valign="bottom" style="color: #003366;"><b>Welcome <?php echo 'username';?></b></td>
+                        <td class="idbar" valign="bottom" style="color: #003366;"><b>Welcome user!</b></td>
                         <td>
                             <table align="right" border="0" cellpadding="0" cellspacing="0">
                                 <tbody><tr>
@@ -198,8 +107,8 @@ img[Attributes Style] {
         </td></tr>
     </tbody></table>
         <!-- top-exp -->
-    <form name="PersonalInfo_Form" action="#" method="post" enctype="multipart/form-data" onsubmit="submit_personalinfo_form();">
-        <input type="text" value="4a05a95c2ab0447968c2c78d99e3a778e6e83b33" name="tk" style="display:none">
+    <form  action="personal-info.php" method="post" enctype="multipart/form-data">
+        <input type="text" value="" name="" style="display:none">
         <table width="1000" border="0" cellpadding="0" cellspacing="0">
             <tbody>
 				<tr>
@@ -207,7 +116,7 @@ img[Attributes Style] {
                     <h1>Personal Information <span><a style="font-size:12px;text-decoration:none;font-weight:normal;" href="#" target="">[?]</a></span></h1>
                 </td>
                 <td style="text-align: right; vertical-align: top;">
-                    <input type="submit" style="font-weight: bold;" name="save_pi_f" value="Save &amp; Continue >>">               
+                    <input type="submit" style="font-weight: bold;" name="submit" value="Save &amp; Continue >>">               
 				</td>
 				</tr>
 			</tbody>
@@ -227,17 +136,17 @@ img[Attributes Style] {
                                 <td>Last Name:<font color="#FF0000">&nbsp;<b>*</b></font></td>
                                 <td><input type="text" size="30" name="lname" value=""></td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td>Password:<font color="#FF0000">&nbsp;<b>*</b></font></td>
-                                <td><input type="password" size="30" name="pass1" value=""> </td>
-                            </tr>
-                            <tr>
+                                <td><input type="password" size="30" name="password" value=""> </td>
+                            </tr> -->
+                            <!-- <tr>
                                 <td>Confirm Password:<font color="#FF0000">&nbsp;<b>*</b></font></td>
-                                <td><input type="password" size="30" name="pass2" value=""></td>
-                            </tr>
+                                <td><input type="password" size="30" name="confirm_pass" value=""></td>
+                            </tr> -->
 
                             <tr>
-                                <td>Date of Birth:<font color="#FF0000">&nbsp;<b>*</b></font></td>
+                                <td>Date of Birth:<font color="#FF0000" name="birth_date">&nbsp;<b>*</b></font></td>
                                 <td><select name="day">
                                         <option value="">
                                             </option><option value="01">01
@@ -295,7 +204,7 @@ img[Attributes Style] {
                             <tr>
                                 <td>City of Birth:</td>
                                 <td>
-                                    <input type="text" name="b_city" size="30" value="">
+                                    <input type="text" name="city_birth" size="30" value="">
                                 </td>
                             </tr>
 
@@ -312,7 +221,7 @@ img[Attributes Style] {
             <table border="0" cellpadding="2" cellspacing="0">
                 <tbody><tr><td width="250">Country of Birth<font color="#FF0000">&nbsp;<b>*</b></font></td>
                     <td>
-                                                    <select name="b_country">
+                                                    <select name="birth_country">
                                 <option value="" selected="">                                    </option><option value="Afghanistan">Afghanistan
 </option><option value="Albania">Albania
 </option><option value="Algeria">Algeria
@@ -745,7 +654,7 @@ img[Attributes Style] {
 </option><option value="Yoruba">Yoruba
 </option><option value="Zulu">Zulu
                             </option></select>
-                            &nbsp;&nbsp;<a style="text-decoration:none;" href="top_help.php#native_lang" target="top_help" title="Multilingual? Sorry, just one native language for now ...">[?]</a>
+                            &nbsp;&nbsp;<a style="text-decoration:none;" href="" target="" title="Multilingual? Sorry, just one native language for now ...">[?]</a>
                                             </td>
                 </tr>
 
@@ -763,11 +672,11 @@ img[Attributes Style] {
             <table border="0" cellpadding="2" cellspacing="0">
                 <tbody><tr>
                     <td width="250">Email:<font color="#FF0000">&nbsp;<b>*</b></font></td>
-                    <td><input type="text" name="email1" size="60" value=""> </td>
+                    <td><input type="text" name="email" size="60" value=""> </td>
                 </tr>
                 <tr>
                     <td>Confirm Email:<font color="#FF0000">&nbsp;<b>*</b></font></td>
-                    <td><input type="text" name="email2" size="60" value=""> </td>
+                    <td><input type="text" name="confirm_email" size="60" value=""> </td>
                 </tr>
                
                 <tr>
@@ -807,8 +716,8 @@ img[Attributes Style] {
                 </tr>
                 <tr>
                     <td>Time Zone:</td>
-                    <td><select name="timeoffset">
-                            <option value=""></option><option value="-12">(GMT -12:00 hours) Eniwetok, Kwajalein
+                    <td><select name="utc">
+                            <!-- <option value=""></option><option value="-12">(GMT -12:00 hours) Eniwetok, Kwajalein
 </option><option value="-11">(GMT -11:00 hours) Midway Island, Samoa
 </option><option value="-10">(GMT -10:00 hours) Hawaii
 </option><option value="-9">(GMT -9:00 hours) Alaska
@@ -838,7 +747,7 @@ img[Attributes Style] {
 </option><option value="+10">(GMT +10:00 hours) AEST (Australian Eastern Standard), Guam
 </option><option value="+11">(GMT +11:00 hours) Magadan, Solomon Islands, New Caledonia
 </option><option value="+12">(GMT +12:00 hours) Auckland, Wellington, Fiji, Kamchatka
-                        </option></select>
+                        </option></select> -->
                     </td>
                 </tr>
                 <tr>
@@ -1091,7 +1000,7 @@ img[Attributes Style] {
 
         <!-- se country not UE => display: none -->
                 <div class="section" id="tax_details">
-            <h2>Tax details &nbsp;&nbsp; <a style="font-size:12px;text-decoration:none;font-weight:normal;" href="top_help.php#payment" target="top_help">[?]</a></h2>
+            <h2>Tax details &nbsp;&nbsp; <a style="font-size:12px;text-decoration:none;font-weight:normal;" href="" target="">[?]</a></h2>
             <table border="0" cellpadding="2" cellspacing="0">
                 <tbody><tr>
                 </tr><tr>
@@ -1119,7 +1028,7 @@ img[Attributes Style] {
                     <td colspan="4">
                         <select name="fiscal" style="font-size: 10px; width: 80%;">
                             <option value="1">Italian company</option><option value="2">Freelancer in Italy with VAT number (IVA+INPS-RA su imponibile+inps)</option><option value="3">Freelancer in Italy without VAT number (-20% RA - collab.occas.sotto i 5000,00 euro)</option><option value="4">Freelancer or company outside EU with VAT number</option><option value="21">Operazione effettuata in regime fiscale forfettario ai sensi dell'art. 1, cc. da 54 a 89 L. 190/2014, non soggetta a IVA né a ritenuta d'acconto (art. 1 co. 67, L. 190/2014 e succ. mod. int., art. 1 c. 54 e seg, come modificato dalla L.145/2018) [SI cassa/INPS al 4%]</option><option value="22">Operazione effettuata in regime fiscale forfettario ai sensi dell'art. 1, cc. da 54 a 89 L. 190/2014, non soggetta a IVA né a ritenuta d'acconto (art. 1 co. 67, L. 190/2014 e succ. mod. int., art. 1 c. 54 e seg, come modificato dalla L.145/2018) [NO cassa/INPS al 4%]</option><option value="31">Operazione soggetta al regime dei diritti d'autore L.633/41 e successive integrazioni. Operazione esente IVA art. 3, c.4, lett. A, DPR 633/72 e successive modifiche</option><option value="99">Freelancer in Italy with VAT number and CNPA 4% (e.g. lawyers)</option><option value="180">Freelancer in Italy with VAT (Regime dei minimi con cassa previdenziale al 4%) &gt; 2012</option><option value="170">Italian company with VAT number (No IVA, no INPS, no RA, regime fiscale di vantaggio per l'imprenditoria giovanile ai sensi dell'art.1, comma 96-117, legge 244/2007 come modificato dall'articolo 27, DL 98/2011)</option><option value="0" selected="">                        </option><option value="10">no vat, EU</option></select>
-                        &nbsp;&nbsp;<a style="text-decoration:none;" href="top_help.php#tax_status" target="top_help">[?]</a>
+                        &nbsp;&nbsp;<a style="text-decoration:none;" href="" target="">[?]</a>
                     </td>
                 </tr>
                 <tr>
@@ -1131,7 +1040,7 @@ img[Attributes Style] {
             <tbody>
 				<tr>
 					<td style="text-align: right; vertical-align: top;">
-						<input type="submit" style="font-weight: bold;" name="save_pi_f" value="Save &amp; Continue >>">        
+						<input type="submit" style="font-weight: bold;" name="submit" value="Save &amp; Continue >>">        
 					</td>
 				</tr>
 			</tbody>
@@ -1147,3 +1056,4 @@ img[Attributes Style] {
 	</div>
 </body>
 </html>
+
