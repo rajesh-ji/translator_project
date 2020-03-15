@@ -42,10 +42,17 @@
                     <ul class="navbar-nav mr-auto mt-md-0">
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        
                        
+                        
                     </ul>
                     <ul class="navbar-nav my-lg-0">
-                                              
+                        <li class="nav-item dropdown">
+                           
+                        </li>
+                        <li class="nav-item dropdown">
+                            
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right scale-up">
@@ -61,14 +68,13 @@
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
                                     <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                             
                                  
                                     <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
-                      
-                      </ul>
+                       
+                    </ul>
                 </div>
             </nav>
         </header>
@@ -80,38 +86,32 @@
                         <div class="dropdown-menu animated flipInY">
                             <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
                             <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
-                          <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                            <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
                 </div>
-            
                 <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                      <li> <a href="index.php" class=" waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard </span></a>
+                     <ul id="sidebarnav">
+                        
+                        <li> <a href="dashbaord.html" class=" waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard </span></a>
                         </li>
-                        <li> <a href="table-data-table.html" class=" waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-laptop-windows"></i><span class="hide-menu">Request</span></a>
+                        <li> <a href="request.html" class=" waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-laptop-windows"></i><span class="hide-menu">Request</span></a>
                         </li>
                         <li> <a href="translator.html#" class=" waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Translator</span></a>
                         </li>
                         <li> <a href="user.html#" class=" waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">User</span></a>
                         </li>
-                        <li> <a href="index3.html#" class=" waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Transaction</span></a>
-                         <ul aria-expanded="false" class="collapse">
-                         <li><a href="amountpay.html">Amount Pay</a></li>
-                         <li><a href="amountpay.html">Timing Of Transaction</a></li>
-                         </ul>
+                        <li> <a href="transaction.html" class=" waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Transaction</span></a>
+                         
                         </li>
-                        <li> <a href="index3.html#" class=" waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">My Service</span></a>
+                        <li> <a class=" waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">My Service</span></a>
                         <ul aria-expanded="false" class="collapse">
-                         <li><a href="amountpay.html">Language List</a></li>
-                         <li><a href="amountpay.html">Language Type</a></li>
-                         <li><a href="amountpay.html">Set language to language prices</a></li>
-                         <li><a href="amountpay.html">Set language type rush fees</a></li>
-                         <li><a href="amountpay.html">Set language type rush fees</a></li>
+                         <li><a href="languagelist.html">Language List</a></li>
+                         <li><a href="languagetype.html">Language Type</a></li>
+                         
                          </ul>
                         </li>
-                        <li> <a href="index3.html#" class=" waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Report</span></a>
-                            </li>
+                        
                         <li> <a href="profile.html" class=" waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-widgets"></i><span class="hide-menu">Profile</span></a>
                             </li>
                     </ul>
@@ -125,6 +125,77 @@
         </aside>
         <div class="page-wrapper">
             <div class="container-fluid">
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card card-outline-info">
+                            <div class="card-header">
+                                <h4 class="m-b-0 text-white">Other Sample form</h4>
+                            </div>
+                            <div class="card-body">
+                                <form action="#">
+                                    <div class="form-body">
+                                        <h3 class="card-title">Person Info</h3>
+                                        <hr>
+                                        <div class="row p-t-20">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Main Language</label>
+                                                     <select class="form-control custom-select">
+                                                        <option value="">English</option>
+                                                        <option value="">Hindi</option>
+                                                    </select>
+                                                    
+                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Converted Language</label>
+                                                     <select class="form-control custom-select">
+                                                        <option value="">Hindi</option>
+                                                        <option value="">English</option>
+                                                    </select>
+                                                    
+                                                     </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Per Word Count</label>
+                                                    <input type="text" class="form-control" >
+                                                     </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Rush Fee</label>
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Urgency Time</label>
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Normal Time</label>
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-success" > Add</button>
+                                       
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="right-sidebar">
                     <div class="slimscrollright">
                         <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
@@ -176,7 +247,10 @@
                     </div>
                 </div>
             </div>
-          </div>
+            <footer class="footer">
+                © 2017 Material Pro Admin by wrappixel.com
+            </footer>
+        </div>
     </div>
     <script src="../assets/plugins/jquery/jquery.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
