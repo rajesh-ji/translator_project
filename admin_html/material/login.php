@@ -15,7 +15,7 @@ if(!isset($_SESSION['login_id'])==''){
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Material Pro Admin Template - The Most Complete & Trusted Bootstrap 4 Admin Template</title>
+    <title>Admin</title>
     <!-- Bootstrap Core CSS -->
     <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -50,7 +50,7 @@ if(!isset($_SESSION['login_id'])==''){
                             <div class="checkbox checkbox-primary pull-left p-t-0">
                                 <input id="checkbox-signup" name="remember" type="checkbox">
                                 <label for="checkbox-signup"> Remember me </label>
-                            </div> <a  class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a> </div>
+                            </div> <a href="#" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a> </div>
                     </div>
                     <div class="form-group text-center m-t-20">
                         <div class="col-xs-12">

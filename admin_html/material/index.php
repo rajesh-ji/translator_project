@@ -144,40 +144,67 @@
                    <div class="col-lg-6">
                      <div class="card">
                            <div class="card-body">
-                           <?php include('include/config.php');
-                                        $q= "select * from users";
-                                        $q1 = mysqli_query($conn,$q);
-                                       ?>
                            <button type="button" class="btn btn-success" style="float:right;">View All</button>
                                <h4 class="card-title">Last 10 Registration</h4>
                                <div class="table-responsive m-t-20">
                                    <table class="table stylish-table">
-                                   <thead>
+                                       <thead>
                                            <tr>
                                                <th colspan="2">Name</th>
-                                               <th>User Role</th>
-                                               <th>Date</th>
-                                               <!-- <th>Timing</th> -->
+                                               <th>City</th>
+                                               <th>Priority</th>
+                                               <th>Timing</th>
                                            </tr>
                                        </thead>
                                        <tbody>
-                                       <?php while($row=mysqli_fetch_assoc($q1)){?>
                                            <tr>
                                                <td style="width:50px;"><span class="round">S</span></td>
                                                <td>
-                                               
-                                                   <h6><?php echo $row['name'];?></h6><small class="text-muted">Web Designer</small></td>
-                                               <td><?php if($row['role_id']==2){
-                                                   echo "translator";
-                                               }else{
-                                                   echo "client";
-                                               }
-                                                ?></td>
-                                               <td><span class=""><?php echo $row['created_at'];?></span></td>
-                                               <!-- <td>$3.9K</td> -->
-                                               
-                                           </tr>  
-                                           <?php } ?> 
+                                                   <h6>Sunil Joshi</h6><small class="text-muted">Web Designer</small></td>
+                                               <td>Elite Admin</td>
+                                               <td><span class="label label-success">Low</span></td>
+                                               <td>$3.9K</td>
+                                           </tr>
+                                           <tr class="active">
+                                               <td><span class="round"><img src="../assets/images/users/2.jpg" alt="user" width="50" /></span></td>
+                                               <td>
+                                                   <h6>Andrew</h6><small class="text-muted">Project Manager</small></td>
+                                               <td>Real Homes</td>
+                                               <td><span class="label label-info">Medium</span></td>
+                                               <td>$23.9K</td>
+                                           </tr>
+                                           <tr>
+                                               <td><span class="round round-success">B</span></td>
+                                               <td>
+                                                   <h6>Bhavesh patel</h6><small class="text-muted">Developer</small></td>
+                                               <td>MedicalPro Theme</td>
+                                               <td><span class="label label-primary">High</span></td>
+                                               <td>$12.9K</td>
+                                           </tr>
+                                           <tr>
+                                               <td><span class="round round-primary">N</span></td>
+                                               <td>
+                                                   <h6>Nirav Joshi</h6><small class="text-muted">Frontend Eng</small></td>
+                                               <td>Elite Admin</td>
+                                               <td><span class="label label-danger">Low</span></td>
+                                               <td>$10.9K</td>
+                                           </tr>
+                                           <tr>
+                                               <td><span class="round round-warning">M</span></td>
+                                               <td>
+                                                   <h6>Micheal Doe</h6><small class="text-muted">Content Writer</small></td>
+                                               <td>Helping Hands</td>
+                                               <td><span class="label label-warning">High</span></td>
+                                               <td>$12.9K</td>
+                                           </tr>
+                                           <tr>
+                                               <td><span class="round round-danger">N</span></td>
+                                               <td>
+                                                   <h6>Johnathan</h6><small class="text-muted">Graphic</small></td>
+                                               <td>Digital Agency</td>
+                                               <td><span class="label label-info">High</span></td>
+                                               <td>$2.6K</td>
+                                           </tr>
                                        </tbody>
                                    </table>
                                </div>

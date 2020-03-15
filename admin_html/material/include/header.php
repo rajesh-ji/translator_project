@@ -1,6 +1,5 @@
 
 <?php include('include/config.php');
-$_SESSION['user_id']=1;
 $user_id = $_SESSION['user_id']; 
 
 $query = mysqli_query($conn, "select * from users where id = '$user_id'");
@@ -31,9 +30,7 @@ $rd = mysqli_fetch_assoc($query);
     <link href="css/style.css" rel="stylesheet">
     
     <link href="css/colors/blue.css" id="theme" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css"> -->
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -131,14 +128,16 @@ $rd = mysqli_fetch_assoc($query);
                          <li><a href="Transaction.php">Timing Of Transaction</a></li>
                          </ul>
                         </li>
-                        <li> <a href="" class=" waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">My Service</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                         <li><a href="language.php?type=lang_list">Language List</a></li>
-                         <li><a href="language.php?type=lang_form">Language Service</a></li>
-                         <li><a href="lang_conversion.php">Language Conversion</a></li>
-                         
-                         </ul>
+                        <!-- my service  -->
+                        <li> <a  class=" waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">My Service</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                 <li><a href="my_service.php?type=lang_list">Language List</a></li>
+                                 <li><a href="my_service.php?type=lang_form">Language Service</a></li>
+                                 
+                                 </ul>
                         </li>
+                        <!-- my service -->
+                       
                         <!-- <li> <a href="index3.html#" class=" waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Report</span></a> -->
                             </li>
                         <li> <a href="profile.php" class=" waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-widgets"></i><span class="hide-menu">Profile</span></a>
