@@ -1,5 +1,5 @@
-
-<?php include('include/config.php');
+<?php include('config.php');
+$_SESSION['user_id']=1;
 $user_id = $_SESSION['user_id']; 
 
 $query = mysqli_query($conn, "select * from users where id = '$user_id'");
@@ -133,6 +133,7 @@ $rd = mysqli_fetch_assoc($query);
                                 <ul aria-expanded="false" class="collapse">
                                  <li><a href="my_service.php?type=lang_list">Language List</a></li>
                                  <li><a href="my_service.php?type=lang_form">Language Service</a></li>
+                                 <li><a href="lang_conversion.php">Conversion List</a></li>
                                  
                                  </ul>
                         </li>
@@ -155,5 +156,6 @@ $rd = mysqli_fetch_assoc($query);
             
         </aside>
 
+    
     
     
