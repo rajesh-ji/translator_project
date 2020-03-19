@@ -81,13 +81,13 @@
                                                                 <div class="boxed boxed--lg bg--white text-center feature">
                                                                     <div class="modal-close modal-close-cross"></div>
                                                                     <h3>Login to Your Account</h3>
-                                                                    <a class="btn block btn--icon bg--facebook type--uppercase" href="#">
+                                                                    <a class="btn block btn--icon bg--facebook type--uppercase" href="#" style="width:53%;">
                                                                         <span class="btn__text">
                                                                             <i class="socicon-facebook"></i>
                                                                             Login with Facebook
                                                                         </span>
                                                                     </a>
-                                                                    <a class="btn block btn--icon bg--twitter type--uppercase" href="#">
+                                                                    <a class="btn block btn--icon bg--twitter type--uppercase" href="#" style="width:53%;">
                                                                         <span class="btn__text">
                                                                             <i class="socicon-twitter"></i>
                                                                             Login with Twitter
@@ -390,21 +390,21 @@
                             <div class="bar__module">
                                 <ul class="menu-horizontal text-left">
                                     <li class="dropdown">
-                                      <a href="enterprise.php">  <span class="">Enterprises</span></a>
+                                      <a href="enterprise.php">  <span class="" style="color: black;">Enterprises</span></a>
                                         <!--end dropdown container-->
                                     </li>
                                     <li class="dropdown">
-                                        <span class="">Developers</span>
+                                        <span class="" href="index.php" style="color: black;">Developers</span>
                                         
                                         <!--end dropdown container-->
                                     </li>
                                     <li class="dropdown">
-                                       <a href="translator.php"> <span class="">Translators</span></a>
+                                       <a href="translator.php"> <span class="" style="color: black;">Translators</span></a>
                                         
                                         <!--end dropdown container-->
                                     </li>
                                     <li class="dropdown">
-                                        <span class="">Labs</span>
+                                        <span class="" href="index.php" style="color: black;">Labs</span>
                                        
                                         <!--end dropdown container-->
                                     </li>
