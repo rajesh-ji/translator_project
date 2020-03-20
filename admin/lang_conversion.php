@@ -2,6 +2,8 @@
  <div class="page-wrapper">
            
             <div class="container-fluid">
+
+            <?php if($login_id==1){?>
               <!-- rush fee conversion form -->
               <div class="card">
                     <div class="card-header">
@@ -32,16 +34,22 @@
                                                                             <?php   }?>
                                                                             </select>
                                 </div>
-
+                        
                             <div class="form-group" style="margin-right: 10px;">
                               <label for="rush fee" style="margin-right: 5px;" class="font-weight-bold">Rush Fee</label>
                               <input type="number" step="0.01" name="rush_fee" class="form-control border-secondary"  placeholder="Enter Fee" name="Rush fee">
                             </div>
+                            
                             <br>
-                            <button type="submit" name="rush_fee_add" class="btn btn-primary">Add Rush Fee</button>
+                                
+                                
+                           <button type="submit" name="rush_fee_add" class="btn btn-primary">Add Rush Fee</button>
+                            
                           </form>
                     </div>
                 </div>
+<?php }?>
+                <!-- lang conversion list -->
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -66,12 +74,19 @@
                                        
                                         <tbody>
                                         <?php
-                                            $q = "select *from lang_conversion";
+                                        
+                                         if($login_id==1){
+                                             $q = "select *from lang_conversion";
+                                         }else{
+                                             $q = "select tras_service.*, lang_conversion.* from tras_service inner join lang_conversion on tras_service.lang_conversion_id = lang_conversion.id where tras_service.`user_id` = '$user_id'";
+                                         }
+                                            
                                             $ql = mysqli_query($conn,$q);
+                                            $id = 1;
                                         ?>
                                         <?php while($row=mysqli_fetch_assoc($ql)){ ?>
                                             <tr>
-                                                <td><?php echo $row['id'];?></td>
+                                                <td><?php echo $id;?></td>
                                                 <td> <?php $Fid= $row['from_lang_id'];
                                                         $fromquery = mysqli_query($conn, "select name from system_lang where id = $Fid"); 
                                                         $res= mysqli_fetch_assoc($fromquery);
@@ -87,7 +102,8 @@
                                                 <td><?php echo $row['per_word_amount'];?></td>
                                                 <td><i class="fa fa-refresh" style="color:green;" class="update_rate"></i></td>
                                             </tr>
-                                        <?php }?>
+                                        <?php $id++;
+                                        }?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -95,6 +111,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- lang conversion list  -->
                 <!--  -->
                 <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

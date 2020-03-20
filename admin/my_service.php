@@ -62,8 +62,19 @@ if($_GET['type']=='lang_form'){
                                     <div class="card-header">
                                         <h4 class="m-b-0 text-white">Update Doc type fee</h4>
                                     </div>
+                                    <?php 
+                                    // include('include/config.php');
+                                    if(isset($_POST['upade_doc'])){
+                                    extarct($_POST);
+                                      $update_doc = mysqli_query($conn,"UPDATE my_doc_rushfee SET fee='$rush_fee' where doc_type='$doc_type'");
+                                       if($update_doc){
+                                           echo "<script> location.reload();</script>";
+                                           header('Location:my_service.php?type=lang_form');
+                                       }
+                                    }
+                                    ?>
                                     <div class="card-body">
-                                            <form action="#">
+                                            <form action="my_service.php?type=lang_form" method="post">
                                                 <div class="form-body">
                                                     <!-- <h3 class="card-title">Person Info</h3> -->
                                                     <!-- <hr> -->
@@ -71,7 +82,7 @@ if($_GET['type']=='lang_form'){
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Doc type</label>
-                                                                 <select class="form-control custom-select">
+                                                                 <select class="form-control custom-select" name="doc_type">
                                                                     <!--  doc type database -->
                                                                     <option value="pdf">PDF</option>
                                                                     <option value="jpg">JPG</option>
@@ -99,7 +110,7 @@ if($_GET['type']=='lang_form'){
                                                    
                                                         
                                                 <div class="form-actions">
-                                                    <button type="submit" class="btn font-weight-bold text-uppercase btn-success btn-block"> Update</button>
+                                                    <button type="submit" name="upade_doc" class="btn font-weight-bold text-uppercase btn-success btn-block"> Update</button>
                                                    
                                                 </div>
                                             
@@ -113,56 +124,20 @@ if($_GET['type']=='lang_form'){
                 <!-- ==================================== -->
                 <!--  add new language and add new doc type -->
 
-                      <div class="row m-2">
-                       <div class="col-lg-6">
-                            <div class="card card-outline-info">
-                                    <div class="card-header">
-                                        <h4 class="m-b-0 text-white">Add New Language</h4>
-                                    </div>
-                                    <div class="card-body">
-                                            <form action="#">
-                                                <div class="form-body">
-                                                    <!-- <h3 class="card-title">Person Info</h3> -->
-                                                    <!-- <hr> -->
-                                                    <div class="row p-t-20">
-                                                        <!-- <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Days</label>
-                                                                 <select class="form-control custom-select">
-                                                                   
-                                                                    <option value="1">1</option>
-                                                                    <option value="3">2-3</option>
-                                                                    <option value="7">4-7</option>
-                                                                </select>
-                                                                
-                                                                </div>
-                                                        </div> -->
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Language Name</label>
-                                                                 <input type="text" name="lang_name" class="form-control">
-                                                                
-                                                                 </div>
-                                                        </div>
-                                                    </div>
-                                                        
-                                                <div class="form-actions">
-                                                    <button type="submit" class="btn font-weight-bold text-uppercase btn-success btn-block"> Add</button>
-                                                   
-                                                </div>
-                                            
-                                    </div></form>
-                            </div></div></div>
-                      
-                        <!--  -->
-                        <!--  -->
-                        <div class="col-lg-6">
+                      <div class="row m-2">                    
+                        <div class="col-lg-12 ">
                             <div class="card card-outline-info">
                                     <div class="card-header">
                                         <h4 class="m-b-0 text-white">Add New Doc Type</h4>
                                     </div>
+                                    <?php 
+                                        if(isset($_POST['add_doc'])){
+                                        extract($_POST);
+                                        $add_doc = mysqli_query($conn,"INSERT INTO `my_doc_rushfee`(`doc_type`, `fee`) VALUES ('$doc_type','$rush_fee')");
+                                    }
+                                    ?>
                                     <div class="card-body">
-                                            <form action="#">
+                                            <form action="my_service.php?type=lang_form" method="post">
                                                 <div class="form-body">
                                                     <!-- <h3 class="card-title">Person Info</h3> -->
                                                     <!-- <hr> -->
@@ -171,7 +146,7 @@ if($_GET['type']=='lang_form'){
                                                             <div class="form-group">
                                                                 <label class="control-label">Doc type</label>
                                                                  <input type="text" name="doc_type" class="form-control">
-                                                                
+
                                                                 </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -193,7 +168,7 @@ if($_GET['type']=='lang_form'){
                                                    
                                                         
                                                 <div class="form-actions">
-                                                    <button type="submit" class="btn font-weight-bold text-uppercase btn-success btn-block"> Add</button>
+                                                    <button type="submit" name="add_doc" class="btn font-weight-bold text-uppercase btn-success btn-block"> Add</button>
                                                    
                                                 </div>
                                             
@@ -222,7 +197,7 @@ if($_GET['type']=='lang_form'){
                         
                         <form action="addnewlang.php" method="POST"  class="form-inline" style="position:relative">
                        
-                            <input type="text" name="lang_name" class="form-control mr-2 border-secondary" placeholder="new language">
+                            <input type="text" name="lang_name" class="form-control mr-2 border-secondary" placeholder="new language" required>
                             <!-- <input type="checkbox" class="form-checkbox"> -->
                             <!-- <input type="hidden" name="front_lang" value="0" /> -->
                             <!-- <input type="hidden" name="front_lang" id="basic_checkbox_2" value="0"    /> -->
@@ -316,8 +291,7 @@ if($_GET['type']=='lang_form'){
             <footer class="footer"> © 2020   </footer>
         </div>
     </div>
-    <?php }
-  ?>
+    <?php }?>
 
    <?php include('include/footer.php');?>
     <script>

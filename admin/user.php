@@ -13,7 +13,7 @@
                                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
+                                                <th >Name</th>
                                                 <th>Username</th>
                                                 <th>Mobile</th>
                                                 <th>Email</th>
@@ -21,19 +21,9 @@
                                                 <th>Operations</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Username</th>
-                                                <th>Mobile</th>
-                                                <th>Email</th>
-                                                <th>Last_Login</th>
-                                                <th>Operations</th>
-                                            </tr>
-                                            
-                                        </tfoot>
+                                        
                                         <tbody>
-                                            <?php $query = mysqli_query($conn, "select * from users where role_id = '1' or '2' or '3'");
+                                            <?php $query = mysqli_query($conn, "select * from users where role_id not in (1)");
                                                     while($rd=mysqli_fetch_assoc($query)){?>
                                                 <tr>
                                                  
@@ -43,22 +33,12 @@
                                                 <td><?php echo $rd['email']?></td>
                                                 <td><?php echo $rd['last_login']?></td>
                                                
-                                                 <td><?php if($rd['status']==1){?>
-                                                    <!-- <a href=""><span class="font-weight-bold ">Block</span></a> -->
-                                                    <div class="price-filter-container">
-                                                        <div class="row-fluid">
-                                                            <button class="span2 btn">
-                                                            Active
-                                                            <i class="image-official-store"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                 <?php   }  else{ ?>
-                                                                    <a href="">Active</a>
-                                                  <?php  }?> <!-- &nbsp;  -->
-
-                                                 
-                                                </td>
+                                                 <td>
+                                                    <?php if($rd['status']=='0'){?>
+                                                            <button class=" active btn btn-info" user ="<?php echo $rd['id'];?>"> Active </button>
+                                                   <?php }else{?>
+                                                      <button class="block btn btn-danger" user ="<?php echo $rd['id'];?>"> block </button>
+                                                    <?php  } ?>                                                </td>
                                                 
                                             </tr>                                         
                                            <?php } ?>     
@@ -71,7 +51,7 @@
                 </div>
                 
             </div>
-            <footer class="footer"> © 2020   </footer>
+            <footer class="footer"> © 2020 IKO.Com  </footer>
         </div>
     </div>
    <?php include('include/footer.php');?>
@@ -123,13 +103,40 @@
     });
     </script>
     <script>
-            $('.btn').on("click", function() {
-        if ($(this).hasClass("price-filter-active")) {
-            $(this).removeClass("price-filter-active");
-        } else {
-            $(this).addClass("price-filter-active");
-        }
-        })
+            $('.block').click(function(){
+                 var id = $(this).attr("user");
+                  alert(id);
+                  // $.ajax({
+                  //     url:'userstatus.php',
+                  //     method:'POST'.
+                  //     data:{
+                  //         mgs:"block",
+                  //         id: id
+                  //    },
+                  //     success:function(response){
+                  //         if(true){alert('this user block');}
+                  //     }
+                  // });
+            });
+    </script>
+    <script>
+            $('.active').click(function(){
+                 var id = $(this).attr("user");
+                 alert(id);
+                 $.ajax({
+                     url:'userstatus.php',
+                     method:'POST'.
+                     data:{
+                         mgs:"active",
+                         id: id
+                     }
+                     return false;
+                     
+                     success:function(response){
+                         if(true){alert('this user active');}
+                     }
+                 });
+            });
     </script>
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 <!-- </body>

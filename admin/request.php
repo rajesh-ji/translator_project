@@ -4,6 +4,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+                        <?php 
+
+                            $all_request = mysqli_query($conn,"select * from user_request");
+                        
+                        ?>
                             <div class="card-body">
                                 <h4 class="card-title">All Request Data</h4>
                                 
@@ -15,7 +20,7 @@
                                                 <th>Translator Name</th>
                                                 <th>Doc Type</th>
                                                 <th>From Lang/To Lang</th>
-                                               
+                                                <th>Amount</th>                                       
                                                 <th>Operations</th>
                                             </tr>
                                         </thead>
@@ -25,70 +30,23 @@
                                                 <th>Translator Name</th>
                                                 <th>Doc Type</th>
                                                 <th>From Lang/To Lang</th>
+                                                <th>Amount</th>
                                                 <th>Operations</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                           
+                                           <?php  while($row = mysqli_fetch_assoc($all_request)) {?> 
                                             <tr>
-                                                <td>Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
+                                                <td><?php echo $row['pname']?></td>
+                                                <td></td>
+                                                <td><?php echo $row['doc_type']?></td>
+                                                <td></td>
+                                                <td><?php echo $row['amount']?></td>
                                                 
                                                 <td><i class="icon-eye"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-edit"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
                                             </tr>
-                                           
-                                            <tr>
-                                                <td>Airi Satou</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>33</td>
-                                                
-                                                <td><i class="icon-eye"><title id="at-svg-facebook-1">Facebook</title></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-edit"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Brielle Williamson</td>
-                                                <td>Integration Specialist</td>
-                                                <td>New York</td>
-                                                <td>61</td>
-                                                
-                                                <td><i class="icon-eye"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-edit"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td>Bradley Greer</td>
-                                                <td>Software Engineer</td>
-                                                <td>London</td>
-                                                <td>41</td>
-                                                
-                                                <td><i class="icon-eye"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-edit"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Angelica Ramos</td>
-                                                <td>Chief Executive Officer (CEO)</td>
-                                                <td>London</td>
-                                                <td>47</td>
-                                                
-                                                <td><i class="icon-eye"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-edit"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Brenden Wagner</td>
-                                                <td>Software Engineer</td>
-                                                <td>San Francisco</td>
-                                                <td>28</td>
-                                                
-                                                <td><i class="icon-eye"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-edit"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bruno Nash</td>
-                                                <td>Software Engineer</td>
-                                                <td>London</td>
-                                                <td>38</td>
-                                                
-                                                <td><i class="icon-eye"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-edit"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
-                                            </tr>
-                                            
+                                       
+                                            <?php }?>
                                         </tbody>
                                     </table>
                                 </div>

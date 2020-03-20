@@ -1,4 +1,6 @@
 <?php include('include/config.php');
+// echo $_SESSION['login_id'];
+// die;
 if(!isset($_SESSION['login_id'])){
     header('Location: login.php');
 }
@@ -155,8 +157,7 @@ $rd = mysqli_fetch_assoc($query);
                             </ul>
                             </li>
                      
-
-                       <?php if($_SESSION['login_id']=='1'){?>         
+      
                         <!-- my service  -->
                         <li> <a  class=" waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">My Service</span></a>
                                 <ul aria-expanded="false" class="collapse">
@@ -167,7 +168,7 @@ $rd = mysqli_fetch_assoc($query);
                                  </ul>
                         </li>
                         <!-- my service -->
-                        <?php }?>
+                        
                         <!-- <li> <a href="index3.html#" class=" waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Report</span></a> -->
                             </li>
                         <li> <a href="profile.php" class=" waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-widgets"></i><span class="hide-menu">Profile</span></a>
