@@ -1,6 +1,4 @@
 <?php include('include/config.php');
-// echo $_SESSION['login_id'];
-// die;
 if(!isset($_SESSION['login_id'])){
     header('Location: login.php');
 }
@@ -166,6 +164,7 @@ $rd = mysqli_fetch_assoc($query);
                                  <li><a href="lang_list.php">Language Service</a></li>
                                  <?php }?>
                                  <li><a href="lang_conversion.php">Conversion List</a></li>
+                                 
                                  </ul>
                         </li>
                         <!-- my service -->
@@ -174,7 +173,6 @@ $rd = mysqli_fetch_assoc($query);
                             </li>
                         <li> <a href="profile.php" class=" waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-widgets"></i><span class="hide-menu">Profile</span></a>
                             </li>
-
                             <!-- for admin -->
                             <?php if($login_id==1){ ?>
                             <!-- admin can add subadmin -->
