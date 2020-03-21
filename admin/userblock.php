@@ -4,7 +4,7 @@ if(isset($_POST['active'])){
 	$mgs = $_POST['active'];
 	$id = $_POST['id'];
 	if($mgs =="active"){
-		$sql = "update users set status = '1' where id = '$id'";
+		$sql = "update system_lang set status = '1' where id = '$id'";
 		$query = mysqli_query($conn, $sql);
 		if($query){
 			echo "successfully updated";
@@ -19,7 +19,7 @@ elseif(isset($_POST['block'])){
 	$mgs = $_POST['block'];
 	$id = $_POST['id'];
 	if($mgs =="block"){
-		$sql = "update users set status = '0' where id = '$id'";
+		$sql = "update system_lang set status = '0' where id = '$id'";
 		$query = mysqli_query($conn, $sql);
 		if($query){
 			echo "successfully updated";

@@ -14,48 +14,40 @@
              <section>
                 <div class="container" style="background-color:#f2f5f7">
                     <div class="row">
-                        <form action="#" class="form-horizontal" method="post">
+                        <form class="form-horizontal" method="post">
                             <div class="col-md-1"></div>
                             <div class="col-md-3">
                                 <div class="" style="width:97%;">
-                                <?php include 'config.php'; 
-                                   $qf = "select * from system_lang";
-                                    $langfrom = mysqli_query($conn,$qf);
-                                ?>
-                                    <label style="font-size: 16px; margin-top: 10px;">From</label>
+                                    <label style="font-size: 16px;padding-bottom: 7px;">From</label>
                                     <div class="selection" style="height:50px;">
                                         <select class="select2" name="select_from">
-                                            <option value="disabled">--Select--</option>  
-                                            <?php while($row = mysqli_fetch_assoc($langfrom)){ ?> 
-                                            <option><?php  $row['id'];?><?php echo $row['name']?></option>
-                                            <?php } ?>
+                                            <option value="disabled">--Select--</option>    
+                                            <option value="de">Delhi</option>   
+                                            <option value="">Delhi</option> 
+                                            <option value="">Rajasthan</option> 
+                                            <option value="">Bihar</option> 
                                         </select>
                                     </div>
                                 </div>
-                                <div class="" style="width:97%; margin-top: 20px;">
+                                <div class="" style="width:97%">
                                     <label style="font-size: 16px;padding-bottom: 7px;">Subject</label>
                                     <select class="select2" name="select_sub">
                                         <option value="disabled">--Select--</option>    
-                                        <option value="law">law</option>   
-                                        <option value="accounting">accounting</option>    
-                                        <option value="english">english</option>   
-                                        <option value="hindi">hindi</option> 
-                                        <option value="sanskrit">sanskrit</option>      
+                                        <option value="">law</option>   
+                                        <option value="">accounting</option>    
+                                        <option value="">english</option>   
+                                        <option value="">hindi</option> 
+                                        <option value="">sanskrit</option>      
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="" style="width:97%; padding-bottom: 15px;">
-                                <?php 
-                                    $qt = "select * from system_lang";
-                                    $langto = mysqli_query($conn,$qt);
-                                ?>
+                                <div class="" style="width:97%;">
                                     <label style="font-size: 16px;padding-bottom: 0px;">To</label>
-                                        <select class="select2" multiple="multiple" name="select_to[]">
+                                        <select class="select2" multiple="multiple" name="select_to">
                                             <option value="">--Select--</option>    
-                                            <?php while($row = mysqli_fetch_assoc($langto)){?>
-                                            <option><?php  $row['id']?><?php echo $row['name']?></option>
-                                            <?php } ?>
+                                            <option value="">Delhi</option>
+                                            <option value="">pune</option>
                                         </select>
                                 </div>
                                 <div class="">
@@ -74,7 +66,7 @@
                                     </div>
                                 </div>
                                 <div class="">
-                                    <button type="button" name="submit" class="btn btn-primary show_price" id="show_price" onclick="changeInnerHtml()" style="width: 257px; height:52px;font-size:16px;" >Show prices</button>
+                                    <button type="button" class="btn btn-primary show_price" id="show_price" onclick="changeInnerHtml()" style="width: 257px; height:52px;font-size:16px;" >Show prices</button>
                                      
                                 </div>
                             </div>
@@ -87,77 +79,81 @@
                     </div>
                 </div>
             
-                <div class="container" id="showprices" style="display:none; background-color:#f2f5f7; margin-left: auto; margin-right:auto; padding-left: 7%;">
-                <h4 style="margin-left: 15px;">Choose your translator</h4>
-                
-                <div class="row" style="margin-top:5px;margin-bottom:50px;">
+                <div class="container" id="showprices" style="display:none;background-color:#f2f5f7;margin-left: auto;margin-right: auto;">
+                <h4>Choose your translator</h4>
+                <div class="container">
+                    <div class="row" style="margin-top:5px;margin-bottom:50px;">
                            
                     <div class="container">
+                       <div class="row">
                           <div class="col-sm-4">
-                            <div class="card">
-                              <img src="img/personal-1.jpg" alt="" width="60px" height="60px" style="border-radius:50%;" class="card-img-left">
-                              <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Hire me</a>
-                              </div>
-                            </div>
+                                <div class="row">
+                                    <img src="img/personal-1.jpg" alt="" width="60px" height="60px" style="border-radius:50%;" class="card-img-left">
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h5>Special title treatment</br></br><i class="fa fa-star"> 4.5</i>
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                          <a href="#" class="btn btn-primary" style="float:right">Hire me</a></h5>
+                                          With supporting text below as a natural lead-in to</br> additional content.
+                                </div>
                           </div>
-                          <div class="col-sm-4">
-                            <div class="card">
-                              <img src="img/personal-1.jpg" alt="" width="60px" height="60px" style="border-radius:50%;" class="card-img-left">
-                              <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Hire me</a>
-                              </div>
-                            </div>
+                           <div class="col-sm-4">
+                                <div class="row">
+                                    <img src="img/personal-1.jpg" alt="" width="60px" height="60px" style="border-radius:50%;" class="card-img-left">
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h5>Special title treatment</br></br><i class="fa fa-star"> 4.5</i>
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                          <a href="#" class="btn btn-primary" style="float:right">Hire me</a></h5>
+                                          With supporting text below as a natural lead-in to</br> additional content.
+                                </div>
                           </div>
-                          <div class="col-sm-4">
-                            <div class="card">
-                            <img src="img/personal-1.jpg" alt="" width="60px" height="60px" style="border-radius:50%;" class="card-img-right">
-                              <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Hire me</a>
-                              </div>
-                            </div>
+                           <div class="col-sm-4">
+                                <div class="row">
+                                    <img src="img/personal-1.jpg" alt="" width="60px" height="60px" style="border-radius:50%;" class="card-img-left">
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h5>Special title treatment</br><i class="fa fa-star"> 4.5</i>
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                          <a href="#" class="btn btn-primary" style="float:right">Hire me</a></h5>
+                                          With supporting text below as a natural lead-in to</br> additional content.
+                                </div>
                           </div>
-                        </div>
+                          </div>
+                          </div>
                         <div class="container " style="margin-top:30px">
-                          <div class="col-sm-4">
-                            <div class="card">
-                              <img src="img/personal-1.jpg" alt="" width="60px" height="60px" style="border-radius:50%;" class="card-img-left">
-                              <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Hire me</a>
-                              </div>
-                            </div>
+                          <div class="row">
+                           <div class="col-sm-4">
+                                <div class="row">
+                                    <img src="img/personal-1.jpg" alt="" width="60px" height="60px" style="border-radius:50%;" class="card-img-left">
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h5>Special title treatment</br></br><i class="fa fa-star"> 4.5</i>
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                          <a href="#" class="btn btn-primary" style="float:right">Hire me</a></h5>
+                                          With supporting text below as a natural lead-in to</br> additional content.
+                                </div>
                           </div>
-                          <div class="col-sm-4">
-                            <div class="card">
-                              <img src="img/personal-1.jpg" alt="" width="60px" height="60px" style="border-radius:50%;" class="card-img-left">
-                              <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Hire me</a>
-                              </div>
-                            </div>
+                           <div class="col-sm-4">
+                                <div class="row">
+                                    <img src="img/personal-1.jpg" alt="" width="60px" height="60px" style="border-radius:50%;" class="card-img-left">
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h5>Special title treatment</br></br><i class="fa fa-star"> 4.5</i>
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                          <a href="#" class="btn btn-primary" style="float:right">Hire me</a></h5>
+                                          With supporting text below as a natural lead-in to</br> additional content.
+                                </div>
                           </div>
-                          <div class="col-sm-4">
-                            <div class="card">
-                            <img src="img/personal-1.jpg" alt="" width="60px" height="60px" style="border-radius:50%;" class="card-img-right">
-                              <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Hire me</a>
-                              </div>
-                            </div>
+                           <div class="col-sm-4">
+                                <div class="row">
+                                    <img src="img/personal-1.jpg" alt="" width="60px" height="60px" style="border-radius:50%;" class="card-img-left">
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h5>Special title treatment</br></br><i class="fa fa-star"> 4.5</i>
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                          <a href="#" class="btn btn-primary" style="float:right">Hire me</a></h5>
+                                          With supporting text below as a natural lead-in to</br> additional content.
+                                </div>
+                          </div>
                           </div>
                         </div>
-                        </div>
-                                        <!--end of container-->
+                    </div>
+                </div>                        <!--end of container-->
             </section>
             
             <section>
@@ -462,4 +458,4 @@
                 </div>
                 <!--end of container-->
             </section>
- <?php include 'footer.php';?>
+<?php include 'footer.php';?>

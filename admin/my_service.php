@@ -1,193 +1,7 @@
-<?php include('include/header.php');
+<?php include('include/header.php'); ?>
       
-if($_GET['type']=='lang_form'){
-?>
 
-
-        <div class="page-wrapper">
-            <div class="container mt-2">
-                <!--conversion fee form  -->
-                   
-            </div>
-            <!-- conversion fee form end  -->
-                <!-- =============================== -->
-                <!-- =============================== -->
-                <!-- Doc type fee form -->
-             
-                     <div class="row m-2">
-                       <div class="col-lg-6">
-                            <div class="card card-outline-info">
-                                    <div class="card-header">
-                                        <h4 class="m-b-0 text-white">Rush fee for Delivery day</h4>
-                                    </div>
-                                    <div class="card-body">
-                                            <form action="#">
-                                                <div class="form-body">
-                                                    <!-- <h3 class="card-title">Person Info</h3> -->
-                                                    <!-- <hr> -->
-                                                    <div class="row p-t-20">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Days</label>
-                                                                 <select class="form-control custom-select">
-                                                                    <!-- add day -->
-                                                                    <option value="1">1</option>
-                                                                    <option value="3">2-3</option>
-                                                                    <option value="7">4-7</option>
-                                                                </select>
-                                                                
-                                                                </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Rush Fee</label>
-                                                                 <input type="number" name="rush_fee" class="form-control">
-                                                                
-                                                                 </div>
-                                                        </div>
-                                                    </div>
-                                                        
-                                                <div class="form-actions">
-                                                    <button type="submit" class="btn font-weight-bold text-uppercase btn-success btn-block"> Add</button>
-                                                   
-                                                </div>
-                                            
-                                    </div></form>
-                            </div></div></div>
-                      
-                        <!--  -->
-                        <!--  -->
-                        <div class="col-lg-6">
-                            <div class="card card-outline-info">
-                                    <div class="card-header">
-                                        <h4 class="m-b-0 text-white">Update Doc type fee</h4>
-                                    </div>
-                                    <?php 
-                                    // include('include/config.php');
-                                    if(isset($_POST['upade_doc'])){
-                                    extarct($_POST);
-                                      $update_doc = mysqli_query($conn,"UPDATE my_doc_rushfee SET fee='$rush_fee' where doc_type='$doc_type'");
-                                       if($update_doc){
-                                           echo "<script> location.reload();</script>";
-                                           header('Location:my_service.php?type=lang_form');
-                                       }
-                                    }
-                                    ?>
-                                    <div class="card-body">
-                                            <form action="my_service.php?type=lang_form" method="post">
-                                                <div class="form-body">
-                                                    <!-- <h3 class="card-title">Person Info</h3> -->
-                                                    <!-- <hr> -->
-                                                    <div class="row p-t-20">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Doc type</label>
-                                                                 <select class="form-control custom-select" name="doc_type">
-                                                                    <!--  doc type database -->
-                                                                    <option value="pdf">PDF</option>
-                                                                    <option value="jpg">JPG</option>
-                                                                    <option value="png">PNG</option>
-                                                                </select>
-                                                                
-                                                                </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Doc Fee</label>
-                                                                 <input type="number" name="rush_fee" class="form-control">
-                                                                
-                                                                 </div>
-                                                        </div>
-                                                    </div>
-                                                   <!--  <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Per Word Count</label>
-                                                                <input type="text" class="form-control">
-                                                                 </div>
-                                                        </div>                                            
-                                                    </div> -->
-                                                   
-                                                        
-                                                <div class="form-actions">
-                                                    <button type="submit" name="upade_doc" class="btn font-weight-bold text-uppercase btn-success btn-block"> Update</button>
-                                                   
-                                                </div>
-                                            
-                                    </div></form>
-                            </div></div></div>
-                    </div>
-
-
-                <!-- Doc type fee form end -->
-                <!-- =================================== -->
-                <!-- ==================================== -->
-                <!--  add new language and add new doc type -->
-
-                      <div class="row m-2">                    
-                        <div class="col-lg-12 ">
-                            <div class="card card-outline-info">
-                                    <div class="card-header">
-                                        <h4 class="m-b-0 text-white">Add New Doc Type</h4>
-                                    </div>
-                                    <?php 
-                                        if(isset($_POST['add_doc'])){
-                                        extract($_POST);
-                                        $add_doc = mysqli_query($conn,"INSERT INTO `my_doc_rushfee`(`doc_type`, `fee`) VALUES ('$doc_type','$rush_fee')");
-                                    }
-                                    ?>
-                                    <div class="card-body">
-                                            <form action="my_service.php?type=lang_form" method="post">
-                                                <div class="form-body">
-                                                    <!-- <h3 class="card-title">Person Info</h3> -->
-                                                    <!-- <hr> -->
-                                                    <div class="row p-t-20">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Doc type</label>
-                                                                 <input type="text" name="doc_type" class="form-control">
-
-                                                                </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Doc Fee</label>
-                                                                 <input type="number" name="rush_fee" class="form-control">
-                                                                
-                                                                 </div>
-                                                        </div>
-                                                    </div>
-                                                   <!--  <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Per Word Count</label>
-                                                                <input type="text" class="form-control">
-                                                                 </div>
-                                                        </div>                                            
-                                                    </div> -->
-                                                   
-                                                        
-                                                <div class="form-actions">
-                                                    <button type="submit" name="add_doc" class="btn font-weight-bold text-uppercase btn-success btn-block"> Add</button>
-                                                   
-                                                </div>
-                                            
-                                    </div></form>
-                            </div></div></div>
-                    </div>
-
-                <!-- add new language and add new doc type -->
-                <!-- =================================== -->
-                <!-- ==================================== -->
-            <footer class="footer">
-                © 2020
-            </footer>
-        </div>
-    </div>
- <?php
- }
- else{
- ?>     <div class="page-wrapper">
+    <div class="page-wrapper">
             <div class="container-fluid">
             <!-- ====================================================================== -->
             <!-- add new language -->
@@ -197,7 +11,7 @@ if($_GET['type']=='lang_form'){
                         
                         <form action="addnewlang.php" method="POST"  class="form-inline" style="position:relative">
                        
-                            <input type="text" name="lang_name" class="form-control mr-2 border-secondary" placeholder="new language" required>
+                            <input type="text" name="lang_name" class="form-control mr-2 border-secondary" placeholder="new language">
                             <!-- <input type="checkbox" class="form-checkbox"> -->
                             <!-- <input type="hidden" name="front_lang" value="0" /> -->
                             <!-- <input type="hidden" name="front_lang" id="basic_checkbox_2" value="0"    /> -->
@@ -267,14 +81,14 @@ if($_GET['type']=='lang_form'){
                                                 <td>
                                                 <?php 
                                                 $flag = $row['status'];
-                                                if($flag == '0')
-                                                {
-                                                    echo "<i class='fa fa-check-square update' style='color:green;' title='inactive'></i> ";
-                                                }
-                                                else{
-                                                    echo "  <i class='fa fa-close update' style='color:red;' title='active'></i>";
-                                                }
-                                                ?>
+                                                if($flag == "0")
+                                                {?>
+                                               <a user="<?php echo $rd['id']?>" class="active">  <i class="fa fa-check-square"   style="color:green;" title="active"></i> </a>
+                                              <?php  }
+                                                else{ ?>
+                                               <a class="block" user="<?php echo $rd['id']?>"> <i class="fa fa-close" style="color:red;" title="block"></i> </a>
+                                                     <!-- <i class='fa fa-close  block' style='color:red;' title='active'></i> -->
+                                                <?php } ?>
                                                 </td>
                                                 <!-- status -->
                                             </tr>
@@ -291,7 +105,7 @@ if($_GET['type']=='lang_form'){
             <footer class="footer"> © 2020   </footer>
         </div>
     </div>
-    <?php }?>
+ 
 
    <?php include('include/footer.php');?>
     <script>
@@ -340,6 +154,44 @@ if($_GET['type']=='lang_form'){
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     });
+    </script>
+    <script>
+            $('.block').click(function(){
+                 var id = $(this).attr("user");
+//alert(id);
+                  $.ajax({
+                     url:"userblock.php",
+                     method:"POST",
+                     data:{
+                         block:"block",
+                         id: id
+                     },
+                     success:function(response){
+                         if(true){
+                            // alert('this user block');
+                         location.reload(true);}
+                     }
+                 });
+            });
+    </script>
+    <script>
+            $('.active').click(function(){
+                 var id = $(this).attr("user");
+//alert(id);
+                 $.ajax({
+                     url:"userblock.php",
+                     method:"POST",
+                     data:{
+                         active:"active",
+                         id: id
+                     },
+                     success:function(response){
+                         if(true){
+                           // alert('this user active');
+                         location.reload(true);}
+                     }
+                 });
+            });
     </script>
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
   

@@ -1,4 +1,4 @@
- <?php include('include/header.php');?>
+<?php include('include/header.php');?>
  <div class="page-wrapper">
             <div class="container-fluid">
                 
@@ -23,7 +23,7 @@
                                         </thead>
                                         
                                         <tbody>
-                                            <?php $query = mysqli_query($conn, "select * from users where role_id not in (1)");
+                                            <?php $query = mysqli_query($conn, "select * from users where role_id = '2'");
                                                     while($rd=mysqli_fetch_assoc($query)){?>
                                                 <tr>
                                                  
@@ -105,35 +105,37 @@
     <script>
             $('.block').click(function(){
                  var id = $(this).attr("user");
-                  alert(id);
-                  // $.ajax({
-                  //     url:'userstatus.php',
-                  //     method:'POST'.
-                  //     data:{
-                  //         mgs:"block",
-                  //         id: id
-                  //    },
-                  //     success:function(response){
-                  //         if(true){alert('this user block');}
-                  //     }
-                  // });
+                  // alert(id);
+                  $.ajax({
+                     url:"userstatus.php",
+                     method:"POST",
+                     data:{
+                         block:"block",
+                         id: id
+                     },
+                     success:function(response){
+                         if(true){
+                            // alert('this user block');
+                         location.reload(true);}
+                     }
+                 });
             });
     </script>
     <script>
             $('.active').click(function(){
                  var id = $(this).attr("user");
-                 alert(id);
+                 // alert(id);
                  $.ajax({
-                     url:'userstatus.php',
-                     method:'POST'.
+                     url:"userstatus.php",
+                     method:"POST",
                      data:{
-                         mgs:"active",
+                         active:"active",
                          id: id
-                     }
-                     return false;
-                     
+                     },
                      success:function(response){
-                         if(true){alert('this user active');}
+                         if(true){
+                           // alert('this user active');
+                         location.reload(true);}
                      }
                  });
             });

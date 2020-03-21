@@ -22,7 +22,7 @@
         <link href="dist/css/select2.min.css" rel="stylesheet" />
         
         <link href=" https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css " rel="stylesheet" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
         <style type="text/css">
             .custom-file-input {
                   color: transparent;
@@ -81,13 +81,14 @@
                                                                 <div class="boxed boxed--lg bg--white text-center feature">
                                                                     <div class="modal-close modal-close-cross"></div>
                                                                     <h3>Login to Your Account</h3>
-                                                                    <a class="btn block btn--icon bg--facebook type--uppercase" href="#" style="width:53%;">
+                                                                    <a class="btn block btn--icon bg--facebook type--uppercase" href="#">
                                                                         <span class="btn__text">
                                                                             <i class="socicon-facebook"></i>
                                                                             Login with Facebook
                                                                         </span>
                                                                     </a>
-                                                                    <a class="btn block btn--icon bg--twitter type--uppercase" href="#" style="width:53%;">
+                                                                    
+                                                                    <a class="btn block btn--icon bg--twitter type--uppercase" href="#">
                                                                         <span class="btn__text">
                                                                             <i class="socicon-twitter"></i>
                                                                             Login with Twitter
@@ -105,8 +106,8 @@
                                                                                 </div>
                                                                                 <div class="col-md-12">
                                                                                     <div class="input-radio">
-                                                                                        <input type="radio" name="login_with" value="3" id="translator">
-                                                                                        <label ></label>
+                                                                                         <label > <input type="radio" name="login_with" value="3" id="translator">
+                                                                                      </label>
                                                                                     </div>                                                                                   
                                                                                         <span>login with translator</span>
                                                                                    
@@ -138,7 +139,8 @@
                                                                             <!--end of row-->
                                                                         </form>
                                                                         <span class="type--fine-print block">Dont have an account yet?
-                                                                            <a href="#">Create account</a>
+                                                                            <a href="#" class="modal-trigger">Create account</a>
+
                                                                         </span>
                                                                         <span class="type--fine-print block">Forgot your username or password?
                                                                             <a href="#">Recover account</a>
@@ -390,21 +392,21 @@
                             <div class="bar__module">
                                 <ul class="menu-horizontal text-left">
                                     <li class="dropdown">
-                                      <a href="enterprise.php">  <span class="" style="color: black;">Enterprises</span></a>
+                                      <a href="enterprise.php">  <span class="">Enterprises</span></a>
                                         <!--end dropdown container-->
                                     </li>
                                     <li class="dropdown">
-                                        <span class="" href="index.php" style="color: black;">Developers</span>
+                                        <span class="">Developers</span>
                                         
                                         <!--end dropdown container-->
                                     </li>
                                     <li class="dropdown">
-                                       <a href="translator.php"> <span class="" style="color: black;">Translators</span></a>
+                                       <a href="translator.php"> <span class="">Translators</span></a>
                                         
                                         <!--end dropdown container-->
                                     </li>
                                     <li class="dropdown">
-                                        <span class="" href="index.php" style="color: black;">Labs</span>
+                                        <span class="">Labs</span>
                                        
                                         <!--end dropdown container-->
                                     </li>
@@ -414,9 +416,9 @@
                             </div>
                             <!--end module-->
                             <div class="bar__module">
-                                <a class="btn btn--sm btn--primary type--uppercase" href="instant_quote.php">
+                                <a class="btn btn--sm btn--primary type--uppercase" href="contact.php">
                                     <span class="btn__text">
-                                       Instant Quote
+                                        Contact us
                                     </span>
                                 </a>
                             </div>

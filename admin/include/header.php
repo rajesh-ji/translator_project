@@ -161,10 +161,11 @@ $rd = mysqli_fetch_assoc($query);
                         <!-- my service  -->
                         <li> <a  class=" waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">My Service</span></a>
                                 <ul aria-expanded="false" class="collapse">
-                                 <li><a href="my_service.php?type=lang_list">Language List</a></li>
-                                 <li><a href="my_service.php?type=lang_form">Language Service</a></li>
+                                <?php if($login_id==1){?>
+                                 <li><a href="my_service.php">Language List</a></li>
+                                 <li><a href="lang_list.php">Language Service</a></li>
+                                 <?php }?>
                                  <li><a href="lang_conversion.php">Conversion List</a></li>
-                                 
                                  </ul>
                         </li>
                         <!-- my service -->
@@ -173,6 +174,14 @@ $rd = mysqli_fetch_assoc($query);
                             </li>
                         <li> <a href="profile.php" class=" waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-widgets"></i><span class="hide-menu">Profile</span></a>
                             </li>
+
+                            <!-- for admin -->
+                            <?php if($login_id==1){ ?>
+                            <!-- admin can add subadmin -->
+                            <li> <a href="subadmin.php" class=" waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-widgets"></i><span class="hide-menu">Add Subadmin</span></a>
+                            </li>
+                            <?php }?>
+                            <!-- subadmin tab close -->
                     </ul>
                 </nav>
                 
