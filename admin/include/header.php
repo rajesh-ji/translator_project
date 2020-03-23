@@ -34,6 +34,7 @@ $rd = mysqli_fetch_assoc($query);
     
     <link href="css/colors/blue.css" id="theme" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -140,7 +141,7 @@ $rd = mysqli_fetch_assoc($query);
                             </ul>
                         </li>
                         <?php if($_SESSION['login_id']=='1'){?>
-                        <li> <a href="Translator.php" class=" waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Translator</span></a>
+                        <li> <a href="translator.php" class=" waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Translator</span></a>
                         </li>
                         <?php }?>
                         <?php if($_SESSION['login_id']=='1'){?>

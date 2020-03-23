@@ -100,11 +100,14 @@
                                                
                                                
                                                 <td><?php echo $row['per_word_amount'];?></td>
-                                                <td><i class="fa fa-refresh" style="color:green;" class="update_rate"></i></td>
+                                                <td>
+                                                <button type="button" data="<?php echo $row['id'];?>"  class="btn btn-info btn-xs assign_tras" >Assign</button>
+                                                <button type="button" data="<?php echo $row['id'];?>"  class="btn btn-info btn-xs view_tras" >View</button>
+                                                </td>
                                             </tr>
                                         <?php $id++;
                                         }?>
-                                        </tbody>
+                                        </tbody>6
                                     </table>
                                 </div>
                             </div>
@@ -114,26 +117,68 @@
                 <!-- lang conversion list  -->
                 <!--  -->
                 <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Assign Translator </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            ...
+                            <form action="assign_tran.php" method="POST">
+                               
+                                <div class="form-group">
+                                    <label for="email">Translator List </label>
+                                    <!-- <input type="text"  id="email"> -->
+                                    <?php $trans_list = mysqli_query($conn,"select * from users where role_id = '3'");
+                                  
+                                    ?>
+                                    <select name="select_trans" class="form-control" id="">
+                                    <?php while($row = mysqli_fetch_assoc($trans_list)){ ?>
+                                         <option value="<?php echo $row['id']; ?>"><?php echo $row['name'];?></option>
+                                         <?php }?>
+                                    </select>
+                                    <input type="hidden" id="lang_conversion_id" name="lang_conversion_id">
+                                </div>
+                            
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                            <button type="submit" name="submit_tran" class="btn btn-primary">Assign Translator</button>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                <!-- assign  modal end -->
+                <!-- view modal start -->
+                <!-- Modal -->
+                <div class="modal fade" id="viewmyModal" tabindex="-1" role="dialog" aria-labelledby="viewmodallable" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="viewmodallable">Tranlators who translate these combination </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                                   <label for="translator"> </label>
+                                   <?php $show_translator = mysqli_query($conn,"select tras_service.*, users.* from tras_service inner join users on tras_service.`user_id` = users.id where `lang_conversion_id` = '$id'");?>
+
+                            
+                        </div>
+                        <div class="modal-footer">
+                           
                         </div>
                         </div>
                     </div>
                     </div>
                 <!--  -->
+                <!-- view modal end -->
             </div>
             <footer class="footer"> © 2020   </footer>
         </div>
@@ -180,14 +225,27 @@
             });
         });
     });
-    $('update_rate').click(function(){
-        $('#update_modal').modal('show');
-    });
+    // $('update_rate').click(function(){
+    //     $('#update_modal').modal('show');
+    // });
     $('#example23').DataTable({
         dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
+    });
+    //-------assign translator----
+    $(".assign_tras").click(function(){
+        var lang_conversion_id = $(this).attr("data");
+        // alert(lang_conversion_id);
+        $("#lang_conversion_id").val(lang_conversion_id);
+        $("#myModal").modal('show');
+    });
+    $(".view_tras").click(function(){
+        var show_trans_id = $(this).attr("data");
+        // alert(show_trans_id);
+         
+        $("#viewmyModal").modal('show');
     });
     </script>
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>

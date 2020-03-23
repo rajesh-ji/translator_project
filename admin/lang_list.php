@@ -1,4 +1,6 @@
+
 <?php include('include/header.php');?>
+
 
 
         <div class="page-wrapper">
@@ -73,10 +75,10 @@
                                                             <div class="form-group">
                                                             
                                                                 <label class="control-label">Doc type</label>
-                                                                 <select class="form-control custom-select" name="doc_type">
+                                                                 <select class="form-control custom-select select_id" name="doc_type">
                                                                     <!--  doc type database -->
                                                                     <?php while($row = mysqli_fetch_assoc($q)){ ?>
-                                                                    <option><?php echo $row['doc_type'];?></option>
+                                                                    <option value="<?php echo $row['id'];?>"><?php echo $row['doc_type'];?></option>
                                                                     <?php }?>
                                                                 </select>
                                                             
@@ -85,8 +87,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Doc Fee</label>
-                                                                 <input type="number" name="rush_fee" class="form-control">
-                                                                
+                                                                 <input type="number" step="0.01" name="rush_fee" id="rush_fee"  class="form-control">
                                                                  </div>
                                                         </div>
                                                     </div>
@@ -124,8 +125,17 @@
                                     <?php 
                                         if(isset($_POST['add_doc'])){
                                         extract($_POST);
-                                        $add_doc = mysqli_query($conn,"INSERT INTO `my_doc_rushfee`(`doc_type`, `fee`) VALUES ('$doc_type','$rush_fee')");
+                                        $query = mysqli_query($conn, "select * from `my_doc_rushfee` where doc_type ='$doc_type'");
+                                        if(mysqli_num_rows($query)>0){
+                                            echo "<script>alert('This Doc Type Already Exists. ');</script>";
+                                        }else{
+                                        $add_doc = mysqli_query($conn,"INSERT INTO `my_doc_rushfee`(`doc_type`, `fee`) VALUES ('$doc_type','
+                                        $rush_fee')");
+                                        if($add_doc){
+                                            echo "<script>alert('Doc Type Successfully Added. ');</script>";
+                                        }
                                     }
+                                }
                                     ?>
                                     <div class="card-header">
                                         <h4 class="m-b-0 text-white">Add New Doc Type</h4>
@@ -139,14 +149,14 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Doc type</label>
-                                                                 <input type="text" name="doc_type" class="form-control">
+                                                                 <input type="text" name="doc_type" required class="form-control">
                                                                 
                                                                 </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Doc Fee</label>
-                                                                 <input type="number" step="0.01" name="rush_fee" class="form-control">
+                                                                 <input type="number" step="0.01" required name="rush_fee" class="form-control">
                                                                 
                                                                  </div>
                                                         </div>
@@ -179,8 +189,25 @@
         </div>
     </div>
  <?php include('include/footer.php');?>
-  <?php include('include/footer.php');?>
+  
     <script>
+        $("select.select_id").change(function(){
+        var id = $(this).children("option:selected").val();
+        // alert( selectedCountry);
+        $.ajax({
+            url:"getamount.php",
+            method:"POST",
+            data:{
+                mgs:"getamount",
+                id :id
+            },
+            success:function(response){
+                $("#rush_fee").val(response);
+                // alert(response);
+            }
+        });
+    });
+
     $(document).ready(function() {
         $('#myTable').DataTable();
         $(document).ready(function() {
@@ -228,14 +255,14 @@
     });
     </script>
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
-    <?php 
-                                    // include('include/config.php');
-                                    if(isset($_POST['update_doc'])){
+    
+<?php 
+                                    
+                          if(isset($_POST['update_doc'])){
                                     extract($_POST);
-                                      $update_doc = mysqli_query($conn,"UPDATE my_doc_rushfee SET fee='$rush_fee' where doc_type='$doc_type'");
+                             $update_doc = mysqli_query($conn,"UPDATE my_doc_rushfee SET fee='$rush_fee' where id='$doc_type'");
                                        if($update_doc){
-                                        //    echo "<script> location.reload();</script>";
-                                           header('Location:lang_php');
+                                           echo "<script>alert('Price updated!');</script>";
                                        }
                                     }
                                     ?>

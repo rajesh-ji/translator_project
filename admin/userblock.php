@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(isset($_POST['active'])){
 	include('include/config.php');
 	$mgs = $_POST['active'];
@@ -27,6 +27,5 @@ elseif(isset($_POST['block'])){
 			echo mysqli_error();
 		}
 	}
-	
 }
 ?>

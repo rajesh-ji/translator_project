@@ -11,7 +11,7 @@
                         
                         <form action="addnewlang.php" method="POST"  class="form-inline" style="position:relative">
                        
-                            <input type="text" name="lang_name" class="form-control mr-2 border-secondary" placeholder="new language">
+                            <input type="text" name="lang_name" class="form-control mr-2 border-secondary" placeholder="new language" required>
                             <!-- <input type="checkbox" class="form-checkbox"> -->
                             <!-- <input type="hidden" name="front_lang" value="0" /> -->
                             <!-- <input type="hidden" name="front_lang" id="basic_checkbox_2" value="0"    /> -->
@@ -79,15 +79,16 @@
                                                 <td><?php echo $row['created_at'];?></td>
                                                 <!-- status -->
                                                 <td>
-                                                <?php 
+                                                <?php
                                                 $flag = $row['status'];
                                                 if($flag == "0")
                                                 {?>
-                                               <a user="<?php echo $rd['id']?>" class="active">  <i class="fa fa-check-square"   style="color:green;" title="active"></i> </a>
+                                               <!-- <a user="" id="active">  <i class="fa fa-check-square"   style="color:green;" title="active"></i> </a> -->
+                                               <button class="btn btn-success active" data ="<?php echo $row['id']?>">Active</button>
                                               <?php  }
                                                 else{ ?>
-                                               <a class="block" user="<?php echo $rd['id']?>"> <i class="fa fa-close" style="color:red;" title="block"></i> </a>
-                                                     <!-- <i class='fa fa-close  block' style='color:red;' title='active'></i> -->
+                                               <!-- <a class="block" user=""> <i class="fa fa-close" style="color:red;" title="block"></i> </a> -->
+                                               <button class="btn btn-danger block" data ="<?php echo $row['id']?>">Block</button>                                                    <!-- <i class='fa fa-close  block' style='color:red;' title='active'></i> -->
                                                 <?php } ?>
                                                 </td>
                                                 <!-- status -->
@@ -155,10 +156,10 @@
         ]
     });
     </script>
-    <script>
-            $('.block').click(function(){
-                 var id = $(this).attr("user");
-//alert(id);
+   <script>
+            $(".block").click(function(){
+                 var id = $(this).attr("data");
+// alert(id);
                   $.ajax({
                      url:"userblock.php",
                      method:"POST",
@@ -176,8 +177,8 @@
     </script>
     <script>
             $('.active').click(function(){
-                 var id = $(this).attr("user");
-//alert(id);
+                 var id = $(this).attr("data");
+// alert(id);
                  $.ajax({
                      url:"userblock.php",
                      method:"POST",
