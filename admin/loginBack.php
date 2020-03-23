@@ -3,7 +3,10 @@
         
         include('include/config.php');
         // echo "<script>alert('submit called');</script>";
-        extract($_POST);
+        // extract($_POST);
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
        print_r($_POST);
        // die;
         $sql = "select *  from users where username = '$username' and role_id  IN ('1','3') ";
