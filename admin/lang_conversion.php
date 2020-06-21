@@ -11,7 +11,8 @@
         if($count>=1){
             $_SESSION['combination_error'] = '**This Combination already exists';
         }else{
-        $query  = mysqli_query($conn, "insert into lang_conversion(from_lang_id,to_lang_id,per_word_amount) value('$first_lang','$second_lang','$rush_fee')");
+       $query  = mysqli_query($conn, "insert into lang_conversion(from_lang_id,to_lang_id,per_word_amount) value('$first_lang','$second_lang','$rush_fee')");
+     
         if($query){
             echo "<script>alert('language conversion added');</script>";
         }
@@ -37,7 +38,7 @@
                     <span id="error" style="color:red;margin-bottom:3px;" ><?php if(isset($_SESSION['combination_error'])){echo $_SESSION['combination_error']; $_SESSION['combination_error']='';}?></span>
                          <form class="form-inline" action="lang_conversion.php" method="POST">
                                 <div class="form-group" style="margin-right: 10px;">
-                                <label for="email" style="margin-right: 5px;" class="font-weight-bold" >First Language</label>
+                                <label style="margin-right: 5px;" class="font-weight-bold" >First Language</label>
                                 <select class="form-control custom-select border-secondary" name="first_lang">
                                                                                         
                                                                                 <!-- form language database -->
@@ -103,6 +104,7 @@
                                          if($login_id==1){
                                              $q = "select *from lang_conversion";
                                          }else{
+                                             $user_id = $_SESSION['admin_id'];
                                              $q = "select tras_service.*, lang_conversion.* from tras_service inner join lang_conversion on tras_service.lang_conversion_id = lang_conversion.id where tras_service.`user_id` = '$user_id'";
                                          }
                                             

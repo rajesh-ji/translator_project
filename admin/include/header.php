@@ -1,11 +1,12 @@
 <?php include('include/config.php');
-if(!isset($_SESSION['login_id'])){
+if(!isset($_SESSION['admin_id'])){
     header('Location: login.php');
 }
- $login_id = $_SESSION['login_id'];
- $user_id = $_SESSION['user_id']; 
+ $admin_login = $_SESSION['admin_id'];
+ $user_id = isset($_SESSION['user_id'])?$_SESSION['user_id']:'';
+ $login_id = $_SESSION['login_id']; 
 
-$query = mysqli_query($conn, "select * from users where id = '$user_id'");
+$query = mysqli_query($conn, "select * from users where id = '$admin_login'");
 $rd = mysqli_fetch_assoc($query);
 ?>
 <!DOCTYPE html>
@@ -93,7 +94,15 @@ $rd = mysqli_fetch_assoc($query);
                     <ul class="navbar-nav my-lg-0">
                         
                     <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="users/<?php echo $rd['image']?>" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="users/<?php echo $rd['image']?>" alt="user" class="profile-pic" />
+                                <!-- add notify on profile pic online/offline -->
+                                    <div class="notify statusTick" style="display:<?php if($rd['onlineStatus']=='0'){echo "none";}?>" > 
+                                        <span class="heartbit"></span> 
+                                        <span class="point"></span> 
+                                    </div>
+                                <!-- add notify on profile pic online/offline end -->
+                            </a>
                             <div class="dropdown-menu dropdown-menu-right scale-up">
                                 <ul class="dropdown-user">
                                     <li>
@@ -102,16 +111,31 @@ $rd = mysqli_fetch_assoc($query);
                                             <div class="u-text">
                                                 <h4><?php  echo $rd['name']?></h4>
                                                 <p class="text-muted"><?php  echo $rd['email']?></p><?php if($_SESSION['role_id']=='3'){ ?><a href="profile.php" class="btn btn-rounded btn-danger btn-sm">View Profile </a> <?php }?></div>
+                                                <!-- checkbox -->
+                                                    <!--<div class="switch">-->
+                                                    <!--    <label>Status-->
+                                                    <!--        <input type="checkbox" <?php if($rd['onlineStatus'=='1']){echo "checked";}?> id="status"  userId="<?php echo $admin_login; ?>"><span class="lever switch-col-blue" ></span></label>-->
+                                                    <!--</div>-->
+                                                <!-- checkbox -->
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
                                     <!-- <li><a href="profile.php"><i class="ti-user"></i> My Profile</a></li> -->
-                                    <!-- <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li> -->
+                                     <!--<li><a href="#"><i class="ti-wallet"></i> My Balance</a></li> -->
                                     <li><a href="logout.php"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
                         </li>
-                        
+                        <!---->
+                        <li class="nav-item ">
+                            <!-- checkbox -->
+                                                    <div class="switch mt-3" >
+                                                        <label>
+                                                            <input type="checkbox" <?php if($rd['onlineStatus']=='1'){echo "checked"; }?> id="status"  userId="<?php echo $admin_login; ?>"><span class="lever switch-col-blue" ></span></label>
+                                                    </div>
+                                                <!-- checkbox -->
+                        </li>
+                        <!---->
                     </ul>
                 </div>
             </nav>
@@ -122,14 +146,20 @@ $rd = mysqli_fetch_assoc($query);
             
             <div class="user-profile" style="background: url(../assets/images/background/user-info.jpg) no-repeat;">
             
-            <div class="profile-img"> <img src="users/<?php echo $rd['image']?>" alt="user"  /> </div>
+            <div class="profile-img"> <img src="users/<?php echo $rd['image']?>" alt="user" width="35px" height="42px" />
+                <!-- add notify on profile pic online/offline -->
+                                    <div class="notify statusTick" style="display:<?php if($rd['onlineStatus']=='0'){echo "none";}?>"> 
+                                        <span class="heartbit"></span> 
+                                        <span class="point"></span> 
+                                    </div>
+                                <!-- add notify on profile pic online/offline end --></div>
     
             <div class="profile-text"> <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
                 <?php echo $rd['name']?>
             </a>
                 <div class="dropdown-menu animated flipInY">
-                    <!-- <a href="profile.php" class="dropdown-item"><i class="ti-user"></i> My Profile</a> 
-                    <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>   -->
+                    <!-- <a href="profile.php" class="dropdown-item"><i class="ti-user"></i> My Profile</a> -->
+                    
                     <a href="logout.php" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
                 </div>
             </div>
@@ -156,8 +186,8 @@ $rd = mysqli_fetch_assoc($query);
                       
                             <li> <a  class=" waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Transaction</span></a>
                             <ul aria-expanded="false" class="collapse">
-                            <li><a href="Transaction.php">Amount Pay</a></li>
-                            <li><a href="Transaction.php">Timing Of Transaction</a></li>
+                            <!--<li><a href="transaction.php">Amount Pay</a></li>-->
+                            <li><a href="transaction.php">All Transaction</a></li>
                             </ul>
                             </li>
                      

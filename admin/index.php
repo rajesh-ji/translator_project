@@ -21,13 +21,13 @@
                                            if($login_id=='1'){
                                                 $today_req = "SELECT count(*) as abc FROM user_request where DATE(created_at) = DATE(NOW())";
                                             }else if($login_id=='3'){
-                                                $today_req = "SELECT count(*) as abc FROM user_request where DATE(created_at) = DATE(NOW()) and translator_id ='$user_id'";
+                                              $today_req = "SELECT count(*) as abc FROM user_request where DATE(created_at) = DATE(NOW()) and translator_id ='$admin_login'";
                                             }
                                            $req_count = mysqli_query($conn,$today_req);
                                            $row = mysqli_fetch_assoc($req_count);
                                            $today_req_record = $row['abc'];
                                             echo $today_req_record;
-
+                                            
                                            ?>
                                            </h2>
                                            <h6 class="text-muted">Today Request</h6></div>
@@ -50,7 +50,7 @@
                                     if($login_id=='1'){
                                         $sqlQuery = "SELECT count(*) as abc from user_request";
                                     }else if($login_id=='3'){
-                                        $sqlQuery = "SELECT count(*) as abc from user_request where translator_id ='$user_id'";
+                                        $sqlQuery = "SELECT count(*) as abc from user_request where translator_id ='$admin_login'";
                                     }
                                     $qt = mysqli_query($conn,$sqlQuery);
                                     $row = mysqli_fetch_assoc($qt);
@@ -77,7 +77,7 @@
                                    <h2 class="font-light m-b-0">
                                     <?php
                                     
-                                    $sqlQuery = "SELECT count(*) as abc from user_request where status='pending' and translator_id ='$user_id'";
+                                    $sqlQuery = "SELECT count(*) as abc from user_request where status='pending' and translator_id ='$admin_login'";
                                     
                                     $qt = mysqli_query($conn,$sqlQuery);
                                     $row = mysqli_fetch_assoc($qt);
@@ -106,7 +106,7 @@
                                     if($login_id=='1'){
                                         $sqlQuery = "SELECT count(*) as abc from user_request";
                                     }else if($login_id=='3'){
-                                        $sqlQuery = "SELECT count(*) as abc from user_request where status='complete' and translator_id ='$user_id'";
+                                        $sqlQuery = "SELECT count(*) as abc from user_request where status='complete' and translator_id ='$admin_login'";
                                     }
                                     $qt = mysqli_query($conn,$sqlQuery);
                                     $row = mysqli_fetch_assoc($qt);
@@ -195,8 +195,8 @@
                                    <table class="table stylish-table">
                                        <thead>
                                            <tr>
-                                               <?php if($login_id=='1'){?>  <th>Name</th><th></th>  <?php }?>
-                                               <th>Project </th>
+                                               <?php if($login_id=='1'){?>  <th>Name</th>  <?php }?>
+                                               
                                                <th>Status</th>
                                                <th>Timing</th>
                                                <th>Delivery</th>
@@ -206,9 +206,9 @@
                                        <tbody>
                                        <?php 
                                        if($_SESSION['login_id']==1){
-                                         $sql = "SELECT user_request.*, users.name FROM user_request inner join users on user_request.translator_id = users.id order by user_request.id asc limit 10";
+                                         $sql = "SELECT user_request.*, users.name FROM user_request inner join users on user_request.translator_id = users.id order by user_request.id desc limit 10";
                                        }else{
-                                              $sql = "SELECT user_request.*, users.name as translator_name FROM user_request inner join users on user_request.translator_id = users.id where translator_id = '$user_id' limit 10";
+                                              $sql = "SELECT user_request.*, users.name as translator_name FROM user_request inner join users on user_request.translator_id = users.id where translator_id = '$admin_login' order by user_request.id desc limit 10";
                                        }
                                                 $query = mysqli_query($conn, $sql);
                                                 $count = mysqli_num_rows($query);
@@ -217,12 +217,12 @@
                                                     while($request = mysqli_fetch_assoc($query)){
                                        ?>
                                            <tr>
-                                            <?php if($login_id=='1'){ ?>  <td><span class="round mr-1" ><?php $username = $request['name'];  echo substr($username,0,1)?></span> </td>
+                                            <?php if($login_id=='1'){ ?> 
                                               <td><h6><?php echo $request['name'];?></h6></td> <?php }?>
-                                              <td><?php echo $request['pname'];?></td>
-                                              <td><?php echo $request['status'];?></td>
-                                              <td><?php $rDate = $request['created_at']; $fDate = strtotime($rDate); echo date("d M y g:i A", $fDate) ; ?></td>
-                                              <td><?php $dDate = strtotime($request['delivery_date']); echo date("d M y g:i A", $dDate) ; ?></td>
+                                            
+                                              <td class="btn btn-primary"><?php echo $request['status'];?></td>
+                                              <td><?php $rDate = $request['created_at']; $fDate = strtotime($rDate); echo date("d M Y g:i A", $fDate) ; ?></td>
+                                              <td><?php $dDate = strtotime($request['delivery_date']); echo date("d M Y g:i A", $dDate) ; ?></td>
                                               
                                            </tr>
                                            <?php } }?>
@@ -256,7 +256,7 @@
                                        </thead>
                                        <tbody>
                                        <?php 
-                                                $query = mysqli_query($conn, "SELECT user_request.*, users.name FROM user_request inner join users on user_request.customer_id = users.id where `translator_id` = '$user_id' order by id desc limit 10 ");
+                                                $query = mysqli_query($conn, "SELECT user_request.*, users.name FROM user_request inner join users on user_request.customer_id = users.id where `translator_id` = '$admin_login' order by id desc limit 10 ");
                                                 
                                                 $count = mysqli_num_rows($query);
                                                 if($count>0){
@@ -287,17 +287,17 @@
                      <div class="card">
                            <div class="card-body">
                            <?php 
-                                        $q= "select * from users where role_id not in (1) limit 10";
+                                        $q= "select * from users where role_id not in (1) order by id desc limit 10";
                                         $q1 = mysqli_query($conn,$q);
                                        ?>
                            <!--<button type="button" class="btn btn-success" style="float:right;"></button>-->
-                           <a href="registration_all.php" class="btn btn-success text-white pull-right">View All</a>
+                           <a href="user.php" class="btn btn-success text-white pull-right">View All</a>
                                <h4 class="card-title">Last 10 Registration</h4>
                                <div class="table-responsive m-t-20">
                                    <table class="table stylish-table">
                                    <thead>
                                            <tr>
-                                               <th colspan="2">Name</th>
+                                               <th>Name</th>
                                                <th>User </th>
                                                <th>Date</th>
                                                <!-- <th>Timing</th> -->
@@ -306,7 +306,7 @@
                                        <tbody>
                                        <?php while($row=mysqli_fetch_assoc($q1)){?>
                                            <tr>
-                                               <td style="width:50px;"><span class="round"><?php $username = $row['name']; echo substr($username,0,1)?></span></td>
+                                               
                                                <td>
                                                
                                                    <h6><?php echo $row['name'];?></h6></td>

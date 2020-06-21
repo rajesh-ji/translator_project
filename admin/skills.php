@@ -3,7 +3,7 @@ if(isset($_POST['skillSubmit'])){
     include('include/config.php');
     extract($_POST);
     // print_r($_POST);
-   $user_id = $_SESSION['user_id'];
+   $user_id = $_SESSION['admin_id'];
   
     $list=  array_values($_POST);
     

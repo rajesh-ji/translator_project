@@ -1,7 +1,8 @@
 <?php
 if(isset($_POST['lang_add'])){
     include('include/config.php');
-    $created_id = $_SESSION['user_id'];
+    $created_id = $_SESSION['admin_id'];
+    
     $lang_name = $_POST['lang_name'];
        
         $front_lang = $_POST['front_lang'];

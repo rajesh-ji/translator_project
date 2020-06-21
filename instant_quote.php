@@ -123,10 +123,10 @@
                             </div>
                             </div>
 							   <div class="col-md-6 col-lg-4">
-                                <label style="font-size: 16px;padding-bottom: 7px;">Subject</label>
+                                <label style="font-size: 16px;padding-bottom: 7px;">Document type</label>
                         	<div class="selection" style="height:50px;">
                             <select name="subject" id="subject" class="select2">
-                                <option value="">Select Subject</option>    
+                                <option value="">Select Document type</option>    
                                 <?php while($lang=mysqli_fetch_assoc($query3)){ ?>
                                 <option value="<?php echo $lang['id']; ?>"><?php echo $lang['doc_type']; ?></option> 
 							  <?php } ?>
@@ -255,7 +255,7 @@
                             
                         
                         	<span class="type--fine-print">
-							    <span class="badge">Pay after delivery</span> We trust you: feel free to pay within 5 days from delivery via bank transfer, credit card, or PayPal. <a href="#">Learn more</a>  
+							    <span class="badge">Quality Check</span>  If you need quality check on your works please choose Document type with quality check marked.
                             </span>
 		                </form>  
                	</div>
@@ -292,45 +292,43 @@
 	    <div class="container">
 	        <div class="row">
 	            <div class="col-md-12">
-	                <h2 style="text-align:center;"><b>Why Choose us</b></h2>
+	                <h2 style="text-align:center;"><b>Why Hire us</b></h2>
 	                <div class="slider" data-arrows="" data-paging="">
 	                    <ul class="row">
 	                        <li class="col-md-4 col-12">
 	                            <div class="feature feature-3 boxed boxed--lg  text-center">
 	                                <i class="color--primary icon icon--lg icon-Nurse"></i>
-	                                <h4>Guaranteed Quality</h4>
+	                                <h4>USCIS APPROVAL 100% GUARANTEED</h4>
 	                                <p>
-	                                    We support the world’s best translators with advanced quality assurance processes. And that’s not all: we provide a free comprehensive translation review if you happen to be unsatisfied.
-	                                </p>
-	                                <a href="#">
-	                                    Read our terms
-	                                </a>
+	                                   All translations are accepted by USCIS and all foreign governments.
+									</p>
+	                                
 	                            </div>
 	                            <!--end feature-->
 	                        </li>
 	                        <li class="col-md-4 col-12">
 	                            <div class="feature feature-3 boxed boxed--lg  text-center">
 	                                <i class="color--primary icon icon--lg icon-Compass-Rose"></i>
-	                                <h4>On-Time Delivery</h4>
+	                                <h4>FAST AND SIMPLE UPLOAD PROCESS</h4>
 	                                <p>
-	                                    We offer the best performance levels in the industry, with an optimized workflow that guarantees over 95% of deliveries on time. Plus, in the unlikely event we miss a deadline, we will refund the translation up to its full cost. &nbsp &nbsp
+	                                  You can easily upload your documents via our “instant quote” page (link to instant quote page). If your document is too large, you can always send us email from our contact page or email us at quote@imotranslation.com
+
+
 	                                </p>
-	                                <a href="#">
-	                                   Read our terms
-	                                </a>
+	                               
 	                            </div>
 	                            <!--end feature-->
 	                        </li>
 	                        <li class="col-md-4 col-12">
 	                            <div class="feature feature-3 boxed boxed--lg  text-center">
 	                                <i class="color--primary icon icon--lg icon-Family-Sign"></i>
-	                                <h4>Pay After Delivery</h4>
+	                                <h4>FAST DELIVERY</h4>
 	                                <p>
-	                                    We genuinely trust our clients, which is why we have created the Pay After Delivery model. With Pay After Delivery, you can pay within five days of the translation’s delivery via credit card, bank transfer or Paypal.
+	                                   Our average turnaround for a 1-3-page document is less than 24 hours.</br>
+									   100% SAFE AND SECURE </br>
+									   We guarantee 100% safety and complete confidentiality for all of your documents. 
 	                                </p>
-	                                <a href="#">
-	                                    Read our terms
-	                                </a>
+	                               
 	                            </div>
 	                            <!--end feature-->
 	                        </li>
@@ -449,74 +447,114 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="text-block">
-                                        <h5 style="font-size: large;color: #0055b8;">Website Localization</h5>
-                                        <p>
-                                            Fully managed solutions for bringing your website to another culture, from multilingual Wordpress sites to complex architectures.
-                                        </p>
+                                        <h5 style="font-size: large;color: #0055b8;">Translation Services</h5>
+                                        
                                     </div>
                                     <div class="text-block">
-                                        <h5 style="font-size: large;color: #0055b8;">Video Subtitling</h5>
-                                        <p>
-                                            Over 40,000 hours of movies & TV Shows adapted with subtitling, voice overs, and dubbing.
-                                        </p>
+                                        <h5 style="font-size: large;color: #0055b8;">Certified Translations</h5>
+                                       
                                     </div>
-                                    <div class="text-block">
-                                        <h5 style="font-size: large;color: #0055b8;">Multilingual DTP</h5>
-                                        <p>
-                                            176 languages, including Asian and right to left languages, to deliver a ready to print file.
                                    
-                                        </p>
-                                    </div>
-                                    <div class="text-block">
-                                        <h5 style="font-size: large;color: #0055b8;">Custom Localization Solutions</h5>
-                                        <p>
-                                           From the high-touch training of translators to match your preferred style, to APIs and custom workflow design.
                                    
-                                        </p>
-                                    </div>
-                                    <div class="text-block">
-                                        <h5 style="font-size: large;color: #0055b8;">Urgent Translations</h5>
-                                        <p>
-                                            We can translate large volumes in hours and small volumes in mere minutes thanks to our large network of translators powered by optimized technologies.
-                                        </p>
-                                    </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="text-block">
-                                        <h5 style="font-size: large;color: #0055b8;">Google Ads translation</h5>
-                                        <p>
-                                            We have been Google’s main partner for the translation of millions of Ads and keywords since 2006.
-                                        </p>
+                                     <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">Transcription Services</h5>
+                                       
                                     </div>
                                     <div class="text-block">
-                                        <h5 style="font-size: large;color: #0055b8;">Software Localization</h5>
-                                        <p>
-                                           We localize the original files of your mobile app or desktop software and test them afterwards, sparing you the trouble of copying and pasting.
-                                        </p>
-                                    </div>
-                                    <div class="text-block">
-                                        <h5 style="font-size: large;color: #0055b8;">Official translations</h5>
-                                        <p>
-                                          Our professional translation services can be certified or sworn in Court, depending on the country where you must present your document.
-                                        </p>
-                                    </div>
-                                    <div class="text-block">
-                                        <h5 style="font-size: large;color: #0055b8;">Multilingual Chatbots</h5>
-                                        <p>
-                                           Integration with chatbot platforms, CMS and customer support ticketing software, dataset expansion, and post-localization testing.
-                                        </p>
-                                    </div>
-                                    <div class="text-block">
-                                        <h5 style="font-size: large;color: #0055b8;">Simple Document Translation</h5>
-                                        <p>
-                                           Use our online quote to experience the fast and easy way to translate your documents in 176 languages, since 1999.
-                                        </p>
+                                        <h5 style="font-size: large;color: #0055b8;">Interpreting Services</h5>
+                                      
                                     </div>
                                 </div>
                             </div>
                             <!--end of row-->
                         </div>
                         <!--end of container-->
+    </section>
+	 <section class=" ">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="text-block">
+                                        <h3><b>Languages</b></h3>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">Arabic</h5>
+                                        
+                                    </div>
+                                    <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">Azeri</h5>
+                                       
+                                    </div>
+									 <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">Dutch</h5>
+                                       
+                                    </div>
+									 <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">English</h5>
+                                       
+                                    </div>
+									 <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">French</h5>
+                                       
+                                    </div>
+                                   
+                                   
+                                </div>
+                                <div class="col-lg-3">
+                                    
+                                    <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">German</h5>
+                                      
+                                    </div>
+									 <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">Greek</h5>
+                                       
+                                    </div>
+                                    <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">Kazakh</h5>
+                                      
+                                    </div>
+									 <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">Kirgiz</h5>
+                                      
+                                    </div>
+									 <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">Korean</h5>
+                                      
+                                    </div>
+                                </div>
+								  <div class="col-lg-3">
+                                      <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">Norwegian</h5>
+                                      
+                                    </div>
+									 <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">Polish</h5>
+                                       
+                                    </div>
+                                    <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">Spanish</h5>
+                                      
+                                    </div>
+									 <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">Swedish</h5>
+                                      
+                                    </div>
+									 <div class="text-block">
+                                        <h5 style="font-size: large;color: #0055b8;">Turkish</h5>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end of row-->
+                        </div>
+                        <!--end of container-->
+						 <p style="text-align:center;font-size:16px;">If your language is not listed above, please contact us at 
+						 <a href="mailto:info@imotranslation.com">info@imotranslation.com</a> and we will try our best to accommodate</p>
     </section>
     <section>
         <div class="container">
@@ -526,8 +564,8 @@
                 <img src="img/giardiniere-translated.png"  alt=""/>
                 </div>
                 <div class="col-md-5">
-                    <h2>Embrace our culture</h2>
-                    <p>We pride ourselves in paying our translators fairly and providing a working environment that is collaborative, fun, and open to everyone: a culture that inspires talents to do great things for you.</p>
+                   
+                    <p>If your language is not listed above, please contact us at info@imotranslation.com and we will try our best to accommodate</p>
                     <a href="#" class="link link--noline  link--medium">About us</a>
                 </div>
                 <div class="col-md-1 offset"></div>
@@ -584,6 +622,7 @@
         subject = $("select[name='subject']").val();
         from_lang = $("#from_lang_id").val();
         to_lang = $("#to_lang_id").val();
+        // alert(to_lang);
         delivery_date = $("select[name='delivery_date']").val();
         time_slot = $("select[name='time_slot']").val();
         zone = $("select[name='zone']").val();
@@ -624,6 +663,11 @@
             $("#to_err").text("Please select to language");
             $("#to_err").show();
         }
+        if(to_lang==from_lang){
+            error=true;
+            $("#to_err").text("Please select different language");
+            $("#to_err").show();
+        }
         if(error===false){
             $.ajax({
     			url:'choose_translator.php',
@@ -642,16 +686,13 @@
 		var data_id=$(this).attr("data-id");
 		var div_id="choose_tras_"+data_id;
 		// alert(div_id);   
-        if($(this).hasClass('btn-success')){
-            $(this).removeClass('btn-success');
-            $(this).addClass('btn-info');
-              $(this).parent().parent().parent().parent().removeClass('selected_tranlator');
-        }
-        else{
+            $('.hire_me').removeClass('btn-success');
+            $('.hire_me').addClass('btn-info');
+            $('.hire_me').parent().parent().parent().parent().removeClass('selected_tranlator');
+    
             $(this).addClass('btn-success');
             $(this).removeClass('btn-info');   
-             $(this).parent().parent().parent().parent().addClass('selected_tranlator');  
-        }
+            $(this).parent().parent().parent().parent().addClass('selected_tranlator');
     });
     $(document).on('click','#done_box',function(){
         delivery_date = $("#delivery_date").val();
@@ -730,6 +771,7 @@
                 cache: false,
                 data:data,
                 success:function(res){
+                    // alert(res);
                     response = JSON.parse(res);
                     if(response.status=="success"){
                         window.location = response.url;    

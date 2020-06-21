@@ -19,6 +19,8 @@ if(!empty($_POST)){
 		$insert = "INSERT INTO `users`(`name`, `username`, `password`, `email`, `mobile`, `profile_pic`, `address1`, `address2`, `role_id`, `zip_code`, `dob`, `latitute`, `longitute`, `image`, `bio`, `social_id`, `status`, `created_utc`, `last_login`, `is_active`,`is_translator`, `login_type`) VALUES ('{$name}','','','{$email}','','','','','{$role_id}','0','0','','','{$picture}','','{$social_id}','{$status}','','','{$is_active}','1','{$login_type}')";
 		mysqli_query($conn,$insert);
 		$id = mysqli_insert_id($conn);
+//insert record in translator_data table
+mysqli_query($conn, "INSERT INTO `traslator_data`(`user_id`) VALUES ('$id')");
 		if(!empty($id)){
 			$_SESSION['login_id'] = 2;
             $_SESSION['user_id'] = $id;
@@ -38,6 +40,9 @@ if(!empty($_POST)){
 	else{
 		$row  = mysqli_fetch_assoc($res);
 		$_SESSION['login_id'] = 2;
+//insert record in translator_data table
+$userID = $row['id'];
+mysqli_query($conn, "INSERT INTO `traslator_data`(`user_id`) VALUES ('$userID')");
         $_SESSION['user_id'] = $row['id'];
         $_SESSION['name'] = $row['name'];
         $_SESSION['image'] = $row['image'];

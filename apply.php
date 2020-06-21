@@ -18,7 +18,7 @@ if(isset($_POST['dologin'])){
                 $id = $row['id'];
                 $query = mysqli_query($conn,"update users set last_login = '$last_login' where id = '$id'");
                  $_SESSION['login_id'] = $row['role_id'];
-                $_SESSION['user_id'] = $row['id'];
+                $_SESSION['admin_id'] = $row['id'];
                 header('Location: admin/index.php');
             }
            
@@ -221,13 +221,22 @@ if(isset($_POST['dologin'])){
                                     email:email
                                 },
                                 success:function(data){
-                                    if(data == 1){
-                                        $("#error").html("This Username or Email already taken!");                                        
-                                    }else if(data == 'success'){
-                                        window.location.href="admin/profile.php";                                        
-                                    }else{
-                                        $("#error").html("505 error!");
-                                    }
+                                    var data = JSON.parse(data);
+                                    // alert(data);
+                                    
+                                        if(data.status==true){
+                                            window.location='admin/profile.php';
+                                        }
+                                        else if(data.status==false){
+                                            $("#error").html(data.massage);
+                                        }
+                                    // if(data == 1){
+                                    //     $("#error").html("This Username or Email already taken!");                                        
+                                    // }else if(data == 'success'){
+                                    //     window.location.href="admin/profile.php";                                        
+                                    // }else{
+                                    //     $("#error").html("505 error!");
+                                    // }
 
                                 }
                             });

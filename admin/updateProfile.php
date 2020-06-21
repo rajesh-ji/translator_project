@@ -5,7 +5,7 @@ if($_POST['update'])
 	include('../config.php');
     extract($_POST);
 	// print_r($_POST);
-	$user_id=$_SESSION['login_id'];
+	$user_id=$_SESSION['admin_id'];
 	if($update_type=="experience")
 	{
 		 $totalrecord=count($field7);

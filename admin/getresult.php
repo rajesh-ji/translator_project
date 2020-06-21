@@ -39,4 +39,18 @@
         }
         echo $op;
     }
+     else if($_POST['tranInfo']){
+        include('include/config.php');
+        $id= $_POST['id'];
+        $tmpquery = mysqli_query($conn, "SELECT   `translator_id`, `conversion_id` FROM `user_request` WHERE id = '$id'");
+        $tmpdata = mysqli_fetch_assoc($tmpquery);
+        $converID = $tmpdata['conversion_id'];
+        $oldTran = $tmpdata['translator_id'];
+        $getTranId = mysqli_query($conn, "SELECT `id`, `name` FROM `users` WHERE id IN(SELECT  `user_id` FROM `tras_service` WHERE `lang_conversion_id` = '$converID' AND status = '1' AND user_id NOT IN('$oldTran') GROUP BY`user_id`)");//
+        $datanaw ='';
+        while($row = mysqli_fetch_assoc($getTranId)){
+            $datanaw.="<option value='".$row['id']."'>".$row['name']."</option>";
+        }
+       echo $datanaw;
+    }
 ?>

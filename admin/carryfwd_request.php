@@ -4,6 +4,23 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+                            <?php
+                            
+                            if($login_id=='1'){
+                                $r="select r.*,users.name as translatorName,lang1.name as from_lang_name,lang2.name as to_lang_name,my_doc_rushfee.doc_type as rush_doc,p.status as payment_status from
+    							user_request as r inner join system_lang as lang1 on lang1.id=r.from_lang inner join system_lang as lang2 on lang2.id=r.to_lang inner join users on users.id = r.translator_id 
+    							inner join my_doc_rushfee on my_doc_rushfee.id=r.doc_type left join payment as p on r.id=p.request_id where r.id IN (SELECT  `request_id` FROM `request_forword`) order by r.id desc";
+                            }else if($login_id=='3'){
+                                // echo "<script>alert('".$admin_login."')</script>";
+                                $r="select r.*,lang1.name as from_lang_name,lang2.name as to_lang_name,my_doc_rushfee.doc_type as rush_doc,p.status as payment_status from
+    							user_request as r inner join system_lang as lang1 on lang1.id=r.from_lang inner join system_lang as lang2 on lang2.id=r.to_lang  
+    							inner join my_doc_rushfee on my_doc_rushfee.id=r.doc_type left join payment as p on r.id=p.request_id where r.id IN (SELECT  `request_id` FROM `request_forword` where `translator_id`='$admin_login') order by r.id desc";
+                            }
+							 
+							
+                            $all_request = mysqli_query($conn,$r);
+                        
+                        ?>
                             <div class="card-body">
                                 <h4 class="card-title">Carry Forwarded Request Data</h4>
                                 
@@ -11,84 +28,83 @@
                                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
+                                                <th>S No</th>
                                                 <th>Project Name</th>
-                                                <th>Translator Name</th>
+                                                <?php if($login_id=='1'){ ?><th>Translator Name</th><?php } ?>
                                                 <th>Doc Type</th>
                                                 <th>From Lang/To Lang</th>
-                                               
+                                                <?php    if($login_id=='1'){ ?>
+                                                <th>Amount</th>                                       
+                                                <th>Payment Status</th>                                       
+                                                <?php }?>
+                                                <th>R. Status</th>                                       
                                                 <th>Operations</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                               <th>Name</th>
-                                                <th>Translator Name</th>
+                                                <th>S No</th>
+                                                <th>Project Name</th>
+                                                <?php if($login_id=='1'){ ?><th>Translator Name</th><?php } ?>
                                                 <th>Doc Type</th>
                                                 <th>From Lang/To Lang</th>
+                                            <?php    if($login_id=='1'){ ?>
+                                                <th>Amount</th>                                       
+                                                <th>Payment Status</th>                                       
+                                                <?php } ?>
+                                                <th>R. Status</th>                                       
                                                 <th>Operations</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                           
+										
+                                           <?php $i=1; while($row = mysqli_fetch_assoc($all_request)) {
+												$payment_status=$row['payment_status'];
+												if($payment_status=="success")
+												{
+													$pay_button="btn-success";
+											
+												}
+												else
+												{
+													$pay_button="btn-danger";
+												}
+													
+											   
+											   ?> 
                                             <tr>
-                                                <td>Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
+                                                <td><?php echo $i;?></td>
+                                                <td><?php echo $row['pname']?></td>
+                                                <?php if($login_id=='1'){?><td><?php echo $row['translatorName']?></td>  <?php }?>
+                                                <td><?php echo $row['rush_doc']?></td>
+                                                <td><?php echo $row['from_lang_name']."/".$row['to_lang_name']; ?></td>
+                                            <?php   if($login_id=='1'){ ?>
+                                                <td><?php echo $row['amount']."$"?></td>
+                                                <td>
+												
+												<span class="btn <?php echo $pay_button;?>">
+										        <?php if($payment_status=="" || $payment_status==null){ echo "Not Submited";} else {echo $payment_status;} ?>
+ 												</span></td>
+ 												<?php }?>
+                                                <td><?php echo $row['status']?></td>
                                                 
-                                                <td><i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
-                                            </tr>
-                                           
-                                            <tr>
-                                                <td>Airi Satou</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>33</td>
-                                                
-                                                <td><i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Brielle Williamson</td>
-                                                <td>Integration Specialist</td>
-                                                <td>New York</td>
-                                                <td>61</td>
-                                                
-                                                <td><i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td>Bradley Greer</td>
-                                                <td>Software Engineer</td>
-                                                <td>London</td>
-                                                <td>41</td>
-                                                
-                                                <td><i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Angelica Ramos</td>
-                                                <td>Chief Executive Officer (CEO)</td>
-                                                <td>London</td>
-                                                <td>47</td>
-                                                
-                                                <td><i class="fa fa-check-circle"  data-toggle="modal" data-target="#exampleModal" data-original-title="accept"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Brenden Wagner</td>
-                                                <td>Software Engineer</td>
-                                                <td>San Francisco</td>
-                                                <td>28</td>
-                                                
-                                                <td><i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Bruno Nash</td>
-                                                <td>Software Engineer</td>
-                                                <td>London</td>
-                                                <td>38</td>
-                                                
-                                                <td><i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
-                                            </tr>
-                                            
+                                                  <td>    
+                                                    <?php
+                                                    if($row['status']=='processing'){?>
+                                                        <a class="btn btn-info block" href="edit_request.php?request_id=<?php echo $row['id']?>"><i class="fa fa-check-circle" title="Submit Request"></i></a> &nbsp;&nbsp;&nbsp;    
+                                                <?php  }
+                                                    if($login_id=='1' && $row['status']=='pending' || $row['status']=='forward'){?>
+                                                        <i class="fa fa-edit assign_tras" data="<?php echo $row['id'];?>" title="Change Translator"></i>&nbsp;&nbsp;&nbsp;    
+                                                    <?php } ?>
+                                                     <?php if($login_id=='3' && $request['status']=='pending'):?>
+                                                        <a class="btn btn-info block" href="change_request.php?request_id=<?php echo $row['id']?>&type=accept"><i class="fa fa-check-circle " title="Accept Request"></i> &nbsp;&nbsp;&nbsp;</a><!-- accept the request -->
+                                                        <a class="btn btn-danger" href="change_request.php?request_id=<?php echo $row['id']?>&type=reject"><i class="icon-close" title="Reject Request"></i></a><!-- for reject request -->
+                                                    <?php endif;
+                                                        if($login_id=='1' && $row['status']!='complete'){?> <a class="btn btn-danger block" href="change_request.php?request_id=<?php echo $request['id']?>&type=delete"><i class="mdi mdi-delete-forever" title="Delete Request Permanent"></i></a>
+                                                    <?php  }?>
+                                                </td>
+                                            </tr>                                       
+                                            <?php  $i++;}?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -153,34 +169,23 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Translator</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Complete Request</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form>
+      <div class="modal-body"> 
+        <form action="carryfwd_request.php" method="POST" id="modalForm">
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Name:</label>
-                <select class="selectpicker" data-style="form-control btn-secondary">
-                                            
-                                                <option>xyz</option>
-                                                <option>xyz</option>
-                                                
-                                        </select>
-
+             <label for="finalFile" class="col-form-label">Translate Document</label>
+             <input type="file" name="doc" class="form-control" id="doc">
+             <input type="hidden" name="id" id='id'>
           </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Per Word Count:</label>
-           <input type="text" class="form-control" id="recipient-name">
-            <label for="message-text" class="col-form-label">Rush Fee:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-        </form>
+         <div class="error" style="color:red;font-weight:600;"></div>
       </div>
       <div class="modal-footer">
-        
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="submit" name="doc-submit" class="btn btn-primary">Submit</button>
+    </form>
       </div>
     </div>
   </div>
@@ -188,32 +193,8 @@
             <footer class="footer"> © 2017 Material Pro Admin by wrappixel.com </footer>
         </div>
            </div>
-    <script src="../assets/plugins/jquery/jquery.min.js"></script>
-    
-    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    
-    <script src="js/jquery.slimscroll.js"></script>
-    
-    <script src="js/waves.js"></script>
-    
-    <script src="js/sidebarmenu.js"></script>
-    
-    <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
-    
-    <script src="js/custom.min.js"></script>
-    
-    <script src="../assets/plugins/datatables/jquery.dataTables.min.js"></script>
-    
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-    
+   <?php include('include/footer.php');?>
+    <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
     <script>
     $(document).ready(function() {
         $('#myTable').DataTable();
@@ -254,6 +235,13 @@
             });
         });
     });
+    // conplete task modal
+    $('.completTask').click(function(){
+        var id = $(this).attr('dataID');
+        $('#id').val(id);
+        $('#exampleModal').modal("show");
+    });
+    // complete task modal end
     $('#example23').DataTable({
         dom: 'Bfrtip',
         buttons: [
@@ -261,7 +249,7 @@
         ]
     });
     </script>
-    <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    
 </body>
 
 </html>

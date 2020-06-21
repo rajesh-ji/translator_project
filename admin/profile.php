@@ -2,14 +2,21 @@
 // profile update  *******START*********
 if(isset($_POST['profileUpdate'])){
     extract($_POST);
-    // print_r($_POST);
+    // extract($_FILES)
+    // print_r($_FILES);
+    
+    
     if(isset($_FILES['image'])){
         $errors= array();
         $file_name = $_FILES['image']['name'];
         $file_size =$_FILES['image']['size'];
         $file_tmp =$_FILES['image']['tmp_name'];
         $file_type=$_FILES['image']['type'];
-        $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
+        // $file_ext=strtolower(end(explode('.',$file_name)));
+        $file_ext = explode('.',$file_name);
+       $file_ext_upper = end($file_ext);
+       $file_ext = strtolower($file_ext_upper);
+      
         
         $extensions= array("jpeg","jpg","png");
         
@@ -25,17 +32,21 @@ if(isset($_POST['profileUpdate'])){
            move_uploaded_file($file_tmp,"users/".$file_name);
            echo "Success";
         }else{
-           print_r($errors);
+        //   print_r($errors);
            $file_name = '';
         }
         
      }    
 
+$user_id = $_SESSION['admin_id'];
 
 
+if($file_name != ''){
+    $sql = "update users set name='$name', username = '$username',password='$password',email='$email',mobile = '$mobile',address1 = '$address',bio='$bio',image='$file_name' where id='$user_id'";
+}else{
+    $sql = "update users set name='$name', username = '$username',password='$password',email='$email',mobile = '$mobile',address1 = '$address',bio='$bio' where id='$user_id'";
+}
 
-
-     $sql = "update users set name='$name', username = '$username',password='$password',email='$email',mobile = '$mobile',address1 = '$address',bio='$bio',image='$file_name' where id='$user_id'";
     $update_profile = mysqli_query($conn,$sql);
     if($update_profile){$_SESSION['update_success']='profile update';}
     else{$_SESSION['update_error']='**Error in Sql';}
@@ -44,7 +55,8 @@ if(isset($_POST['profileUpdate'])){
 if($login_id==1){
     echo "<script>window.location.href='index.php';</script>";
 }else{
-     $user_id = $_SESSION['user_id'];
+     $user_id = $_SESSION['admin_id'];
+     
      $login_id = $_SESSION['login_id'];
     $query = mysqli_query($conn, "select * from users where id = '$user_id'");
     
@@ -97,6 +109,11 @@ if($login_id==1){
                                 <center class="m-t-30"> <img src="users/<?php echo $rd['image']?>" class="img-circle" width="150" height="150" />
                                     <h4 class="card-title m-t-10"><?php echo $rd['name'];?></h4>
                                     <h2 class="card-subtitle"> Tranlator</h2>
+<!--********************************************************************************************************************************************************************************* -->
+                                    <!--<h4 class="card-title m-t-10">-->
+                                    <!--    <button type="button" id="off"  dataId=<?php echo $user_id; ?> >Offline</button>-->
+                                    <!--</h4>   -->
+<!--********************************************************************************************************************************************************************************* -->
                                     <!-- <div class="row text-center justify-content-md-center">
                                         <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
                                         <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
@@ -181,7 +198,7 @@ if($login_id==1){
                                 <!-- personal tab close -->
                                 <!-- exprience tab -->
 								<?php 
-								 $user_id=$_SESSION['user_id'];
+								 $user_id=$_SESSION['admin_id'];
 								// die;
 								  $edu_query=mysqli_query($conn,"select * from trans_exp where user_id='$user_id' and field_type='1'");  
 								  
@@ -350,7 +367,7 @@ if($login_id==1){
                                       <div class="card-body">                        
                                       <!-- get translator skill list in store in array -->
                                       <?php
-                                      
+                                      $user_id=$_SESSION['admin_id'];
                                         // echo $abc = "select tool_skill_list from traslator_data where `user_id` = '$user_id'";
                                             $query= mysqli_query($conn,"select tool_skill_list from traslator_data where `user_id` = '$user_id'");
                                             $queryResult = mysqli_fetch_assoc($query);
@@ -528,26 +545,49 @@ $(document).ready(function(){
         var email = $('#email').val();
         var mobile = $('#mobile').val();
         var bio = $('#bio').val();
-        $.ajax({
-            url:'updateProfile.php',
-            method:'POST',
-            data:{
-                mgs:"adminProfile",
-                id:id,
-                name:name,
-                pass:pass,
-                email:email,
-                mobile:mobile,
-                bio:bio
-            },
-            success:function(response){
-                alert('update successfully');
-                location.reload(true);
-            },
-            error:function(){
-                alert('problem in updating');
-            }
+            $.ajax({
+                url:'updateProfile.php',
+                method:'POST',
+                data:{
+                    mgs:"adminProfile",
+                    id:id,
+                    name:name,
+                    pass:pass,
+                    email:email,
+                    mobile:mobile,
+                    bio:bio
+                },
+                success:function(response){
+                    alert('update successfully');
+                    location.reload(true);
+                },
+                error:function(){
+                    alert('problem in updating');
+                }
+            });
         });
-        });
+        
+           
+            
+            // for offline statue
+            // $('#off').click(function(){
+            //     var id = $(this).attr('dataId');
+            //     alert("off click button click"+id); 
+            // });
+            
+             // for online statue
+            // $('#offline').on('click',function(){
+            //     alert("off click button click");
+            //     // var id = $(this).attr('dataId');
+                 
+            // });
+                    
+                
+                // $('#statusTick').css("display","flex");    
+                // $('#statusTick').css("display","none"); 
+                
+        
+        
 });
 </script>
+         

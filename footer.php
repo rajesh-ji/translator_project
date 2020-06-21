@@ -5,25 +5,19 @@
                             <ul class="list-inline">
                                 <li>
                                     <a href="#">
-                                        <span class="h6 type--uppercase">About</span>
+                                        <span class="h6 type--uppercase">Home</span>
                                     </a>
                                 </li>
 								<li>
                                     <a href="#">
-                                        <span class="h6 type--uppercase">What's new</span>
+                                        <span class="h6 type--uppercase">About us</span>
                                     </a>
                                 </li>
 								<li>
                                     <a href="#">
-                                        <span class="h6 type--uppercase">FAQ</span>
+                                        <span class="h6 type--uppercase">Contact us</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="h6 type--uppercase">Careers</span>
-                                    </a>
-                                </li>
-								
 								
                             </ul>
                         </div>
@@ -81,16 +75,16 @@
                     <div class="row">
                         <div class="col-md-2">
                             <span class="type--fine-print">&copy;
-                                <span class="update-year"></span> Stack Inc.</span>
-                            <a class="type--fine-print" href="#">Privacy Policy</a>
-                            <a class="type--fine-print" href="#">Legal</a>
+                                <span class="update-year"></span> Imo Translation.</span>
+                            <a class="type--fine-print" href="/privacy-policy">Privacy Policy</a>
+                            <a class="type--fine-print" href="/faq">FAQ</a>
                         </div>
                         <div class="col-md-2 text-right text-center-xs">
-                            <a class="type--fine-print" href="#">support@stack.io</a>
+                            <a class="type--fine-print" href="mailto:info@imotranslation.com">info@imotranslation.com</a>
                         </div>
 						<div class="col-md-8 text-right text-center-xs">
-                           <a class="" >1-888-216-9155</a>
-							<a class="" href="">info@translated.com</a>
+                           <a class="" >1-609-353-4995</a>
+							<a class="" href="">info@imotranslation.com</a>
                         </div>
                     </div>
                     <!--end of row-->
@@ -169,46 +163,51 @@ $(document).ready(function() {
             $('#signUp').click(function(){
                 // alert('signup click');
                 var username = $('#signupUsername').val();
+                var signupemail = $('#signupemail').val();
+                var signupname = $('#signupname').val();
                 
-                var password = $('#signupPassword').val();
+                var res_password = $('#signupPassword').val();
                 
                 var type = $('#type').val();
-                
+                // alert(username);
                 // alert('signup click '+username+" "+password+" "+type);
-                if(username==""||password==""||type==""){
+			   
+                if(username==""||res_password==""||type==""){
                             $('#signUpError').css("backgroundColor",'red');                           
-                            $('#signUpError').html("*Null not allowed");
+                            $('#signUpError').html("Please Check All Required Field");
                             return false;
                 }
-                else if(password.length<6){
+                else if(res_password.length<6){
                             $('#signUpError').css("backgroundColor",'red');
                             $('#signUpError').html("*password not less than 6 character");
                             return false;
-                }
+                }   
                 
                 else {
+					var data = {username:username,mgs:"signup",email:signupemail,name:signupname,password:res_password,type:type};
+			 $.ajax({
+					  
+					  url :'signup.php',
+					  type:'POST',  
+					  dataType : 'json',
+					  data:data,
+					  success:function(response){
+							var data = JSON.parse(JSON.stringify(response)); 
+						  if(data.status)
+						  {
+							 window.location.href=data.location;
+							 
+						  }
+						  else
+						  {   
+								 $('#signUpError').css("backgroundColor",'red');
+                                $('#signUpError').html(data.mgs);
+						  }
+						  
+						}		  
+				  });  
                     // alert('else called');    
-                    $.ajax({
-                         url:"signup.php",
-                         method:"POST",
-                         dataType:"json",
-                         data:{
-                             mgs:"signup",
-                             username:username,
-                             password:password,
-                             type:type
-                         },
-                         success:function(response){
-                            var data = JSON.parse(JSON.stringify(response));
-                            if(data.status=='true'){
-                                window.location.hred= 'data.location';
-                            }
-                            else{
-                                $('#signUpError').css("backgroundColor",'red');
-                                $('#signUpError').html("data.mgs");
-                            }
-                         }
-                    });
+                  
                 }
             
                         

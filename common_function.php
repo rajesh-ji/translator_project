@@ -14,8 +14,8 @@ function getRequestAmount($delivery_date,$subject,$per_word_amount,$word_count){
 	$days = $diff->format("%a");
 	$delivery_rush_fee=0;
 	// echo "select * from delivery_fee where min <=$days and max >= $days limit 1";
-	$query3=mysqli_query($conn,"select * from delivery_fee where min >=$days and max <= $days limit 1");
-	if($query3 &&  mysqli_fetch_assoc($query3)){
+	$query3=mysqli_query($conn,"select * from delivery_fee where min <=$days and max >= $days limit 1");
+	if($query3 && mysqli_num_rows($query3)){
 		$delivery_data = mysqli_fetch_assoc($query3);
 		$delivery_rush_fee = $delivery_data['fee'];	
 	}

@@ -42,9 +42,11 @@ if(!empty($_POST)){
 	$amount_data = getRequestAmount($delivery_date,$doc_type,$per_word_amount,$word_count);
 	$subject_fee = $amount_data['subject_fee'];
     $delivery_rush_fee = $amount_data['delivery_rush_fee'];
+    
     $sql =  "select lc.*,tras_service.lang_conversion_id,tras_service.user_id from tras_service 
     inner join lang_conversion as lc on tras_service.lang_conversion_id=lc.id
-    where lc.from_lang_id in($from_lang) and lc.to_lang_id in($to_lang) group by lc.id";
+    where lc.from_lang_id in($from_lang) and lc.to_lang_id in($to_lang)";
+    
     $res = mysqli_query($conn,$sql);
     if(mysqli_num_rows($res)){
     	while ($row=mysqli_fetch_assoc($res)) {
@@ -55,9 +57,12 @@ if(!empty($_POST)){
     $translator_ids = explode(',', $_POST['translator_ids']);
     $total_amount = $amount_data['total_amount'];
     $trans_sql = "INSERT INTO `payment`(`status`,amount,per_word_fee,subject_fee,delivery_fee) VALUES ('pending','{$total_amount}','{$per_word_amount}','{$subject_fee}','{$delivery_rush_fee}')";
+ 
+   
     mysqli_query($conn,$trans_sql);
     $transation_id = mysqli_insert_id($conn);
     // print_r($lang_data);
+    // print_r($translator_ids);
     foreach($translator_ids as $trans_id){
         // echo $trans_id;
         if(empty($lang_data[$trans_id])){
@@ -91,7 +96,7 @@ function fileupload($file){
     if(!empty($file["name"])){ 
          
         // File path config 
-        $fileName = basename($file["name"]); 
+        $fileName = time().basename($file["name"]); 
         $targetFilePath = $uploadDir . $fileName; 
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
          

@@ -12,8 +12,12 @@ include_once 'header.php';
 
     $res = mysqli_query($conn,"select * from payment where transation_id=$request_id limit 1");
     $payment = mysqli_fetch_assoc($res);
-
-    $lang_res = mysqli_query($conn,"select system_lang.name from user_request inner join system_lang on system_lang.id=user_request.to_lang where transation_id=$request_id and user_request.status='pending'");
+	$login_user_id=$_SESSION['user_id'];
+     $user_q = mysqli_query($conn,"select * from users where id=$login_user_id limit 1");
+    $user_d = mysqli_fetch_assoc($user_q);   
+	// print_R($user_d);
+	// die;
+    $lang_res = mysqli_query($conn,"select system_lang.name from system_lang  inner join user_request on system_lang.id=user_request.to_lang where transation_id=$request_id and user_request.status='pending'");
     // print_r($request);
     if(!empty($_POST)){
     
@@ -88,18 +92,17 @@ die('please wait .....');
                                     <div class="col-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h4 class="card-title">Project Name</h4>
-                                                <h6 class="card-subtitle"></h6>
-                                                <input class="form-control" type="text" name="email" placeholder="Project Name">
+                                                <small class="card-title">Project Name</small>
+                                              <input class="form-control" type="text" name="project_name" placeholder="Project Name">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h4 class="card-title">Email*</h4>
-                                                
-                                                <input class="form-control" type="text" name="email" placeholder="Email">
+                                             
+										<small class="card-title">Email *  (we will send traslated data on that email)</small>
+                                                <input class="form-control" required value="<?php if(isset($user_d['email'])){ echo $user_d['email'];} ?>" type="text" name="email" placeholder="Email">
                                             </div>
                                         </div>
                                     </div>
@@ -108,17 +111,17 @@ die('please wait .....');
                                     <div class="col-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h4 class="card-title">Phone Number*</h4>
-                                                <h6 class="card-subtitle"></h6>
-                                                <input class="form-control" type="text" name="phone_number" placeholder="Phone Number">
+                                               
+												<small class="card-title">Phone Number *</small>
+                                                <input class="form-control" value="<?php if(isset($user_d['mobile'])){ if($user_d['mobile']!=0) echo $user_d['mobile'];} ?>"  type="text" name="phone_number" placeholder="Phone Number">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h4 class="card-title">Company*</h4>
-                                                <h6 class="card-subtitle"></h6>
+											<small class="card-title">Company *</small>
+                                               
                                                 <input class="form-control" type="text" name="company" placeholder="Company">
                                             </div>
                                         </div>
@@ -129,8 +132,9 @@ die('please wait .....');
                                     <div class="col-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h4 class="card-title">Address 1*</h4>
-                                                <h6 class="card-subtitle"></h6>
+                                               
+												<small class="card-title">Address 1</small>
+                                             
                                                 <input class="form-control" type="text" name="address1" placeholder="Address 1">
                                             </div>
                                         </div>
@@ -138,8 +142,9 @@ die('please wait .....');
                                     <div class="col-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h4 class="card-title">Address 2*</h4>
-                                                <h6 class="card-subtitle"></h6>
+                                              
+												<small class="card-title">Address 2 *</small>
+                                             
                                                 <input class="form-control" type="text" name="address2" placeholder="Address 2">
                                             </div>
                                         </div>
@@ -149,8 +154,9 @@ die('please wait .....');
                                     <div class="col-4">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h4 class="card-title">State*</h4>
-                                                <h6 class="card-subtitle"></h6>
+                                             
+												<small class="card-title">State *</small>
+                                             
                                                 <input class="form-control" type="text" name="state" placeholder="State">
                                             </div>
                                         </div>
@@ -158,8 +164,9 @@ die('please wait .....');
                                     <div class="col-4">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h4 class="card-title">City*</h4>
-                                                <h6 class="card-subtitle"></h6>
+                                                
+												<small class="card-title">City *</small>
+                                             
                                                 <input class="form-control" type="text" name="city" placeholder="City">
                                             </div>
                                         </div>
@@ -167,8 +174,9 @@ die('please wait .....');
                                     <div class="col-4">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h4 class="card-title">Zip code</h4>
-                                                <h6 class="card-subtitle"></h6>
+                                               
+												<small class="card-title">Zip Code *</small>
+                                             
                                                 <input class="form-control" type="text" name="zipcode" placeholder="Zipcode">
                                             </div>
                                         </div>
@@ -178,7 +186,7 @@ die('please wait .....');
                                     <div class="col-lg-12 col-md-6">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h4 class="card-title">Notes for the translator</h4>
+                                             
                                                 <textarea name="note" class="form-control" placeholder="Note for translator"></textarea>
                                             </div>
                                         </div>

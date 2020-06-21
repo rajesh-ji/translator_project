@@ -22,8 +22,9 @@ if(!isset($_SESSION['login_id'])==''){
         //     print_r($rd);
             if($rd['password']==$password){
                
-          $_SESSION['login_id'] = $rd['role_id'];
-          $_SESSION['user_id'] = $rd['id'];
+          // $_SESSION['admin_login'] = $rd['role_id'];
+          $_SESSION['admin_id'] = $rd['id'];
+          $_SESSION['login_id'] = 1;
         //   echo $_SESSION['login_id'];
         //   echo $_SESSION['user_id'];
         $last_login = date('Y-m-d h:i:s');
@@ -56,7 +57,7 @@ if(!isset($_SESSION['login_id'])==''){
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Material Pro Admin Template - The Most Complete & Trusted Bootstrap 4 Admin Template</title>
+    <title>Admin || Imo Service</title>
     <!-- Bootstrap Core CSS -->
     <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->

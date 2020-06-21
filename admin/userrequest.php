@@ -1,7 +1,7 @@
 <?php
 include('include/header.php');
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['admin_id'];
 ?>
 <?php 
 if(isset($_POST['request'])){
@@ -113,7 +113,7 @@ if(isset($_POST['request'])){
                                                         </tbody>
                                                     </table>
                          <input type="hidden" value="<?php echo $user_id?>" name="user_id">
-                         <button type="submit" name="submit">add language</button>
+                         <button type="submit" class="btn btn-primary" name="submit">add language</button>
                          </form>
         </div></div>
         </div></div>

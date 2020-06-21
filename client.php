@@ -8,7 +8,7 @@
         
         $query = mysqli_query($conn, "select * from users where username = '$username' or email = '$email'");
         $count = mysqli_num_rows($query);
-
+        
         
         if($count==0){
             
@@ -18,16 +18,21 @@
                 $_SESSION['last_inserted_id'] = $inserted_user_id; 
                 $_SESSION['login_id'] = 3;
                 $_SESSION['user_id'] = $inserted_user_id;
+                $_SESSION['admin_id'] = $inserted_user_id;
                 
                 $tran_data_query = mysqli_query($conn,"insert into traslator_data(user_id) value('$inserted_user_id')");
-                echo  'success';
+                $data['status']=true;
             }else{
-                echo 'failed';
+                $data['status']=false;
+                $data['massage']='Error In SQL**';
             }
            
         }else{
-            echo 1;
+            $data['status']=false;
+            $data['massage']='Record Found With This Email or Username';
           }
+          
+          echo json_encode($data);
         
         
     }

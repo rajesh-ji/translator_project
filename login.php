@@ -35,6 +35,7 @@ if(isset($_POST['mgs'])){
                     $query = mysqli_query($conn,"update users set last_login = '$last_login' where id = '$id'");
                      $_SESSION['login_id'] = $rd['role_id'];
                     $_SESSION['user_id'] = $rd['id'];
+                    $_SESSION['admin_id'] = $rd['id'];
                     $res['status']='true';
                     $res['location']='admin/index.php';
                     

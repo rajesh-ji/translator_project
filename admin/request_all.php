@@ -1,4 +1,6 @@
-<?php include('include/header.php');?>
+<?php include('include/header.php');
+
+?>
 <div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -6,54 +8,71 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">All Requests</h4>
-                                
-
                                  <!-- lst 10 registration -->
-                                    <?php if($_SESSION['login_id']==1){?>                                
+                                    <?php 
+
+print_r($_SESSION);
+if($_SESSION['login_id']==1 || $_SESSION['login_id']==3){?>                                
                                         <div class="card">
-                                            <div class="card-body">                                                                                                                                  
+                                            <div class="card-body">                                  
                                                 <div class="table-responsive m-t-20">
                                                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                                     <thead>
                                                             <tr>
                                                             <th>Name</th>
-                                                
-                                                            <th>Translator</th>
+                                                            <th></th>
                                                             <th>P. Name</th>
+                                                            <th>Subject</th>
+                                                            <th>Translator</th>
                                                             <th>Status</th>
-                                                            <th>Timing</th>
+                                                            <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                         <?php 
-                                                                if($_SESSION['login_id']==1){
-                                                                    $sql = "SELECT user_request.*, users.name FROM user_request inner join users on user_request.customer_id = users.id limit 15";
-                                                                }else{
-                                                                        $sql = "SELECT user_request.*, users.name FROM user_request inner join users on user_request.customer_id = users.id where translator_id = '$user_id' limit 5";
-                                                                }
-                                                                            $query = mysqli_query($conn, $sql);
-                                                                            $request = mysqli_fetch_assoc($query);
-                                                                ?>
-                                                                    <tr>
-                                                                        <td><span class="round mr-1" ><?php $username = $request['name'];  echo substr($username,0,1)?></span> </td>
-                                                                        <td><h6><?php echo $request['name'];?></h6></td>
-                                                                        <td><?php echo $request['pname'];?></td>
-                                                                        <td><?php echo $request['doc_type'];?></td>
-                                                                        <td><?php  echo date("d M y g:i A", time()); ?></td>
-                                                                        
-                                                                    </tr>
-                                           
+                                                        if($_SESSION['login_id']==1){
+                                                        $sql = "SELECT user_request.*,(select doc_type from my_doc_rushfee where my_doc_rushfee.id=user_request.doc_type) as subject, users.name FROM user_request inner join users on user_request.customer_id = users.id limit 15";
+                                                        }else{
+                                                        $sql = "SELECT user_request.*,(select doc_type from my_doc_rushfee where my_doc_rushfee.id=user_request.doc_type) as subject, users.name FROM user_request inner join users on user_request.customer_id = users.id where translator_id = '$user_id' limit 5";
+                                                        }
+                                                        $query = mysqli_query($conn, $sql);
+                                                        while($request = mysqli_fetch_assoc($query)):
+                                                            $doc_type = $request['subject'];
+                                                            if($request['status']=='complete'){
+                                                                $status_class = "label label-success";
+                                                            }
+                                                            elseif ($request['status']=='processing') {
+                                                                $status_class = "label label-warning";
+                                                            }
+                                                            else{
+                                                                $status_class = "label label-info";
+                                                            }
+                                                        ?>
+                                                        <tr>
+                                                            <td><span class="round mr-1" style="text-transform: capitalize;" ><?php $username = $request['name'];  echo substr($username,0,1)?></span> </td>
+                                                            <td><h6><?php echo $request['name'];?></h6></td>
+                                                            <td><?php echo $request['pname'];?></td>
+                                                            <td><?php echo $doc_type;?>
+                                                            </td>
+                                                            <td><?php echo $request['name'];?></td>
+                                                            <td><span style="text-transform: capitalize;" class="btn <?php echo $status_class;?>"><?php echo $request['status'];?></span></td>
+                                                            <td>
+                                                                <a class="btn btn-info block" href="edit_request.php?request_id=<?php echo $request['id']?>">Edit</a>
+                                                                <a class="btn btn-danger block" href="change_request.php?request_id=<?php echo $request['id']?>&type=delete">Delete</a>
+                                                                <?php if($request['status']=='pending'):?>
+                                                                <a class="btn btn-info block" href="change_request.php?request_id=<?php echo $request['id']?>&type=accept">Accept</a>
+                                                                <a class="btn btn-danger" href="change_request.php?request_id=<?php echo $request['id']?>&type=reject">Reject</a>
+                                                                <?php endif;?>
+                                                            </td>
+
+                                                        </tr>
+                                                    <?php endwhile;?>
                                                         </tbody>
                                                     </table>
                                                 </div>
                                             </div>
-                                        
-                    ​
                                     </div>
-                                        <?php }?>
-                                
-                                   
-                               
+                                    <?php }?>
                             </div>
                         </div>
                         

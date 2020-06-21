@@ -1,51 +1,116 @@
-<?php include('include/header.php');?>
+<?php include('include/header.php');
+
+?>
 <div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                         <?php 
-
-                            $all_request = mysqli_query($conn,"select * from user_request");
+                        if($login_id==1){
+                             $r="select r.*,users.name as translatorName,lang1.name as from_lang_name,lang2.name as to_lang_name,my_doc_rushfee.doc_type as rush_doc,p.status as payment_status from
+							user_request as r inner join system_lang as lang1 on lang1.id=r.from_lang inner join users on users.id = r.translator_id inner join system_lang as lang2 on lang2.id=r.to_lang 
+							inner join my_doc_rushfee on my_doc_rushfee.id=r.doc_type left join payment as p on r.id=p.request_id order by r.id desc";
+                        }else if($login_id==3){
+                             $r="select r.*,lang1.name as from_lang_name,lang2.name as to_lang_name,my_doc_rushfee.doc_type as rush_doc,p.status as payment_status from
+							user_request as r inner join system_lang as lang1 on lang1.id=r.from_lang inner join system_lang as lang2 on lang2.id=r.to_lang 
+							inner join my_doc_rushfee on my_doc_rushfee.id=r.doc_type left join payment as p on r.id=p.request_id where r.translator_id='$admin_login' order by r.id desc";
+                        }
+                        // echo "<script>console.log('".$login_id."')</script>";
+                        // echo "<script>console.log('".$admin_login."')</script>";
+				        // $r="select r.*,lang1.name as from_lang_name,lang2.name as to_lang_name,my_doc_rushfee.doc_type as rush_doc,p.status as payment_status from
+				        // user_request as r inner join system_lang as lang1 on lang1.id=r.from_lang inner join system_lang as lang2 on lang2.id=r.to_lang 
+				        // inner join my_doc_rushfee on my_doc_rushfee.id=r.doc_type left join payment as p on r.id=p.request_id order by r.id desc";
+				
+                            $all_request = mysqli_query($conn,$r);
                         
                         ?>
-                            <div class="card-body">
+                            <div class="card-body">  
                                 <h4 class="card-title">All Request Data</h4>
                                 
                                 <div class="table-responsive m-t-40">
                                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
+                                                <th>S No</th>
                                                 <th>Project Name</th>
-                                                <!-- <th>Translator Name</th> -->
+                                                 <?php if($login_id=='1'){ ?><th>Translator Name</th><?php } ?>
                                                 <th>Doc Type</th>
                                                 <th>From Lang/To Lang</th>
+                                                <?php if($login_id=='1'){?>
                                                 <th>Amount</th>                                       
+                                                <th>Payment Status</th>
+                                                <?php }?>
+                                                
+                                                <th>R. Status</th>                                       
                                                 <th>Operations</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                               <th>Name</th>
-                                                <!-- <th>Translator Name</th> -->
+                                                <th>S No</th>
+                                                <th>Project Name</th>
+                                                <?php if($login_id=='1'){ ?><th>Translator Name</th><?php } ?>
                                                 <th>Doc Type</th>
                                                 <th>From Lang/To Lang</th>
-                                                <th>Amount</th>
+                                                <?php if($login_id=='1'){?>
+                                                <th>Amount</th>                                       
+                                                <th>Payment Status</th>
+                                                <?php }?>
+                                                
+                                                <th>R. Status</th>                                       
                                                 <th>Operations</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                           <?php  while($row = mysqli_fetch_assoc($all_request)) {?> 
+										
+                                           <?php  $i=1; while($row = mysqli_fetch_assoc($all_request)) {
+												$payment_status=$row['payment_status'];
+												if($payment_status=="success")
+												{
+													$pay_button="btn-success";
+											
+												}
+												else
+												{
+													$pay_button="btn-danger";
+												}
+											   ?> 
                                             <tr>
+                                                <td><?php echo $i;?></td>
                                                 <td><?php echo $row['pname']?></td>
-                                                <!-- <td></td> -->
-                                                <td><?php echo $row['doc_type']?></td>
-                                                <td></td>
-                                                <td><?php echo $row['amount']?></td>
+                                                 <?php if($login_id=='1'){?><td><?php echo $row['translatorName']?></td>  <?php }?>
+                                                <td><?php echo $row['rush_doc']?></td>
+                                                <td><?php echo $row['from_lang_name']."/".$row['to_lang_name']; ?></td>
+                                                <?php if($login_id=='1'){?>
+                                                <td><?php echo $row['amount']."$"?></td>
+                                                <td>
+												
+												<span class="btn <?php echo $pay_button;?>">
+										        <?php if($payment_status=="" || $payment_status==null){ echo "Not Submited";} else {echo $payment_status;} ?>
+ 												</span></td>
+ 												<?php }?>
+ 												
+                                                <td><?php echo $row['status']?></td>
                                                 
-                                                <td><i class="icon-eye"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-edit assign_tras" data="<?php echo $row['id'];?>"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-check-circle" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;<i class="icon-close"></i></td>
+                                                <td>    
+                                                    <?php
+                                                    if($row['status']=='processing'){?>
+                                                        <a class="btn btn-info block" href="edit_request.php?request_id=<?php echo $row['id']?>"><i class="fa fa-check-circle" title="Submit Request"></i></a> &nbsp;&nbsp;&nbsp;    
+                                                <?php  }
+                                                    if($login_id!='3' && ($row['status']=='pending' || $row['status']=='forward')){?>
+                                                        <i class="fa fa-edit assign_tras" data="<?php echo $row['id'];?>" requestID="<?php echo $row['conversion_id'];?>" title="Change Translator"></i>&nbsp;&nbsp;&nbsp;    
+                                                    <?php } ?>
+                                                     <?php if($login_id=='3' && $row['status']=='pending'):?>
+                                                        <a class="btn btn-info block" href="change_request.php?request_id=<?php echo $row['id']?>&type=accept"><i class="fa fa-check-circle " title="Accept Request"></i> &nbsp;&nbsp;&nbsp;</a><!-- accept the request -->
+                                                        <a class="btn btn-danger" href="change_request.php?request_id=<?php echo $row['id']?>&type=reject"><i class="icon-close" title="Reject Request"></i></a><!-- for reject request -->
+                                                    <?php endif;
+                                                        if($login_id=='1' && $row['status']!='complete'){?>
+                                                            <a class="btn btn-danger block" href="change_request.php?request_id=<?php echo $row['id']?>&type=delete"><i class="mdi mdi-delete-forever" title="Delete Request Permanent"></i></a>   
+                                                    <?php  }?>
+                                                </td>
                                             </tr>                                       
-                                            <?php }?>
+                                            <?php  $i++;}?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -117,20 +182,13 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="assign_tran.php" method="POST">
-                               
+                            <form action="request.php" method="POST">
                                 <div class="form-group">
-                                    <label for="email">Translator List </label>
-                                    <!-- <input type="text"  id="email"> -->
-                                    <?php $trans_list = mysqli_query($conn,"select * from users where role_id = '3'");
-                                  
-                                    ?>
-                                    <select name="select_trans" class="form-control" id="">
-                                    <?php while($row = mysqli_fetch_assoc($trans_list)){ ?>
-                                         <option value="<?php echo $row['id']; ?>"><?php echo $row['name'];?></option>
-                                         <?php }?>
+                                    <label for="l">Translator List </label>
+                                    <select name="select_trans" class="form-control" id="selectTrans">
+                                   
                                     </select>
-                                    <input type="hidden" id="lang_conversion_id" name="lang_conversion_id">
+                                    <input type="hidden" id="id" name="id">
                                 </div>
                             
                         </div>
@@ -150,31 +208,23 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Translator</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Complete Request</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <form>
+      <div class="modal-body"> 
+        <form action="carryfwd_request.php" method="POST" id="modalForm">
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Name:</label>
-                <select class="selectpicker form-control" data-style="form-control btn-secondary">                     
-                     <option>test</option>
-                     <option>test1</option>                                              
-                </select>
+             <label for="finalFile" class="col-form-label">Translate Document</label>
+             <input type="file" name="doc" class="form-control" id="doc">
+             <input type="hidden" name="id" id='rewid'>
           </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Per Word Count:</label>
-           <input type="text" class="form-control" id="recipient-name">
-            <label for="message-text" class="col-form-label">Rush Fee:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-        </form>
+         <div class="error" style="color:red;font-weight:600;"></div>
       </div>
       <div class="modal-footer">
-        
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="submit" name="doc-submit" class="btn btn-primary">Submit</button>
+    </form>
       </div>
     </div>
   </div>
@@ -182,31 +232,7 @@
             <footer class="footer"> © 2017 Material Pro Admin by wrappixel.com </footer>
         </div>
            </div>
-    <script src="../assets/plugins/jquery/jquery.min.js"></script>
-    
-    <script src="../assets/plugins/bootstrap/js/popper.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    
-    <script src="js/jquery.slimscroll.js"></script>
-    
-    <script src="js/waves.js"></script>
-    
-    <script src="js/sidebarmenu.js"></script>
-    
-    <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
-    
-    <script src="js/custom.min.js"></script>
-    
-    <script src="../assets/plugins/datatables/jquery.dataTables.min.js"></script>
-    
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+   <?php include('include/footer.php');?>
     
     <script>
     $(document).ready(function() {
@@ -255,14 +281,43 @@
         ]
     });
     //-------show translator----
-    $(".assign_tras").click(function(){
-        var lang_conversion_id = $(this).attr("data");
-        // alert(lang_conversion_id);
-        $("#lang_conversion_id").val(lang_conversion_id);
-        $("#myModal").modal('show');
+     $(".assign_tras").click(function(){
+        var id = $(this).attr("data");
+        var conID = $(this).attr('requestID');
+        // alert(id);
+        $("#id").val(id);
+        $.ajax({
+            url:"getresult.php",
+            method:"POST",
+            data:{tranInfo:"getTranInfo",id:id,conID:conID,},
+            success:function(res){
+                // alert(res);
+                $('#selectTrans').html(res);
+                $('#myModal').modal('show');
+            }
+        });
     });
+  
     </script>
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 <!-- </body>
 
 </html> -->
+<?php 
+if(isset($_POST['submit_tran'])){
+    extract($_POST);
+// print_r($_POST);
+
+$utc = strtotime(date("d-m-y h:i:s"));
+ $query = mysqli_query($conn,"UPDATE `user_request` SET `status` = 'forward',`translator_id`='$select_trans', `modified_at`=now() WHERE id = '$id'");
+ if($query){
+    if(mysqli_query($conn, "INSERT INTO `request_forword`( `translator_id`, `request_id`, `request_status`,`created_utc`) VALUES ('$select_trans','$id','R','$utc')")){
+        echo "<script>alert('Translator Change for this service')</script>";
+    }
+ }else{
+    echo "<script>alert('Translator Not Change for this service! Error')</script>";
+ }
+}
+
+
+?>

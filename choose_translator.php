@@ -30,7 +30,7 @@ if(!empty($_POST)){
         }
     }
     $amount_data = getRequestAmount($delivery_date,$subject,$per_word_amount,$word_count);
-    $sql =  "select * from users where id in (select user_id from tras_service where lang_conversion_id in(select id from lang_conversion where from_lang_id in($from_lang) and to_lang_id in($to_lang) group by id))";
+    $sql =  "select * from users where id in (select user_id from tras_service where lang_conversion_id in(select id from lang_conversion where from_lang_id in($from_lang) and to_lang_id in($to_lang) group by id) and status = '1')";
     $res = mysqli_query($conn,$sql);
     if(mysqli_num_rows($res)){ ?>
         
@@ -68,7 +68,7 @@ if(!empty($_POST)){
     </div>
     <?php }else{?>
         <div>
-            <h4>No Record found with your selected language</h4>    
+            <h4><strong> No Record found with your selected language </strong></h4>    
         </div>
     <?php } ?>
     <div class="boxed boxed--border">

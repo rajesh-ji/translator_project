@@ -16,6 +16,7 @@
         <link href="css/flickity.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/iconsmind.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/jquery.steps.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
         <link href="css/theme.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/custom.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/font-rubiklato.css" rel="stylesheet" type="text/css" media="all" />
@@ -59,6 +60,27 @@
                 .custom-file-input:active::before {
                   background: -webkit-linear-gradient(top, #E3E3E3, #F9F9F9);
                 }
+				input::-webkit-input-placeholder {
+color: black !important;
+}
+ 
+input:-moz-placeholder { /* Firefox 18- */
+color: black !important;  
+}
+ 
+input::-moz-placeholder {  /* Firefox 19+ */
+color: black !important;  
+}
+ 
+input:-ms-input-placeholder {  
+color: black !important;  
+}
+.required_field
+{
+	color:red !important;
+	font-size:16px;
+}
+
         </style>
         <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
@@ -73,10 +95,11 @@
 		<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-		<link rel="manifest" href="/manifest.json">
+		
 		<meta name="msapplication-TileColor" content="#ffffff">
 		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 		<meta name="theme-color" content="#ffffff">
+		<link rel="manifest" href="manifest.json">
     </head>
     <body class=" ">
         <a id="start"></a>
@@ -208,7 +231,7 @@
                                                 <section class="imageblock feature-large bg--white border--round ">
                                                     <div class="imageblock__content col-lg-5 col-md-3 pos-left">
                                                         <div class="background-image-holder">
-                                                            <img alt="image" src="img/cowork-11.jpg" />
+                                                            <img alt="image" src="assets/images/background/login-register.jpg" />
                                                         </div>
                                                     </div>
                                                     <div class="container">
@@ -217,7 +240,7 @@
                                                                 <div class="row justify-content-center">
                                                                     <div class="col-lg-10 col-md-11">
                                                                         <h2>Create an account</h2>
-                                                                        <p class="lead">Get started with a 14 day free trial, No credit card required &mdash; cancel at any time.</p>
+                                                                       
                                                                         <a class="btn block btn--icon bg--facebook type--uppercase" onclick="fbLogin()">
                                                                             <span class="btn__text">
                                                                                 <i class="socicon-facebook"></i>
@@ -235,17 +258,27 @@
                                                                         <form>
                                                                             <div class="row">
                                                                             <div class="col-12">
+																			<label>Select Account type <span class="required_field">*</span></label>
                                                                                     <select name="type" id="type" class="form-control text-center">
                                                                                         <option >--Select Account Type--</option>
-                                                                                        <option value="2">Client</option>
+                                                                                        <option value="2">User</option>
                                                                                         <option value="3">Translator</option>
                                                                                     </select>
                                                                                 </div>
-
-                                                                                <div class="col-12">
-                                                                                    <input type="text" id="signupUsername" name="username" placeholder="Username"  />
+																				<div class="col-12">
+																				<label>Name <span class="required_field">*</span></label>
+                                                                                    <input type="text" id="signupname" name="name" placeholder="Name"  />
                                                                                 </div>
                                                                                 <div class="col-12">
+																				<label>Username <span class="required_field">*</span></label>
+                                                                                    <input type="text" id="signupUsername" name="username" placeholder="Username"  />
+                                                                                </div>
+																				 <div class="col-12">
+																				 <label>Email <span class="required_field"></span></label>
+                                                                                    <input type="text" id="signupemail" name="email" placeholder="Email"  />
+                                                                                </div>
+                                                                                <div class="col-12">
+																				<label>Password <span class="required_field">*</span></label>
                                                                                     <input type="password" id="signupPassword" name="Password" placeholder="Password" />
                                                                                 </div>
                                                                                 
@@ -297,11 +330,11 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li>
+                                <!--li>
                                     <a href="#" data-notification-link="side-menu">
                                         <i class="stack-dot-3"></i>
                                     </a>
-                                </li>
+                                </li!-->
                             </ul>
                         </div>
                     </div>
@@ -339,31 +372,36 @@
             <div class="side-menu__module">
                 <ul class="list--loose list--hover">
                     <li>
-                        <a href="#">
-                            <span class="h5">About Stack</span>
+                        <a href="index.php">
+                            <span class="h5">Home</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <span class="h5">Careers</span>
+                            <span class="h5">About-us</span>
+                        </a>
+                    </li>
+					<li>
+                        <a href="services.php">
+                            <span class="h5">Services</span>
+                        </a>
+                    </li>      
+                    <li>
+                        <a href="#">
+                            <span class="h5">Enterprices</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <span class="h5">Investors</span>
+                            <span class="h5">Translators</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <span class="h5">Locations</span>
+                            <span class="h5">Contact us</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <span class="h5">Contact</span>
-                        </a>
-                    </li>
-                </ul>
+                </ul>     
             </div>
             <!--end module-->
             <hr>
@@ -413,7 +451,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-3 col-md-2">
-                            <a href="index.html">
+                            <a href="index.php">
                                 <img class="logo logo-dark" alt="logo" src="img/logo-dark.png" />
                                 <img class="logo logo-light" alt="logo" src="img/logo-light.png" />
                             </a>
@@ -444,26 +482,40 @@
                         <div class="col-lg-11 col-md-12 text-right text-left-xs text-left-sm">
                             <div class="bar__module">
                                 <ul class="menu-horizontal text-left">
-                                    <li class="dropdown">
-                                      <a href="enterprise.php">  <span class="">Enterprises</span></a>
-                                        <!--end dropdown container-->
-                                    </li>
-                                    <li class="dropdown">
-                                        <span class="">Developers</span>
+								     <li class="dropdown">
+                                        <a href="/index.php">  <span class="">Home</span></a>
                                         
                                         <!--end dropdown container-->
                                     </li>
                                     <li class="dropdown">
-                                       <a href="translator.php"> <span class="">Translators</span></a>
+                                        <a href="/about-us.php">  <span class="">About us</span></a>
                                         
                                         <!--end dropdown container-->
                                     </li>
+									<li>
+										<a href="services.php">
+											<span class="h5">Services</span>
+										</a>
+									</li>      
+									
                                     <li class="dropdown">
-                                        <span class="">Labs</span>
-                                       
+                                      <a href="/enterprise.php">  <span class="">Enterprises</span></a>
                                         <!--end dropdown container-->
                                     </li>
-                              
+                                  
+                                    <li class="dropdown">
+                                       <a href="/translator.php"> <span class="">Translators</span></a>
+             
+                                        <!--end dropdown container-->
+                                    </li>
+                                    <li class="dropdown">
+                                       <a href="/contact.php"> <span class="">Contact us</span></a>
+                                    </li>
+                                    <?php if(isset($_SESSION['user_id'])){ ?>
+                                    <li class="dropdown">
+                                       <a href="/dashboard.php"> <span class="">YOUr Order</span></a>
+                                    </li>
+                                    <?php } ?>
                                   
                                 </ul>
                             </div>
